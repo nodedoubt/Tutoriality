@@ -2,7 +2,9 @@ var browserify = require('browserify-middleware')
 var express = require('express')
 var Path = require('path')
 
-var routes = express.Router()
+var routes = express.Router();
+var routers = [];
+
 
 //
 // Provide a browserified file at a specified path
@@ -11,21 +13,16 @@ routes.get('/app-bundle.js',
   browserify('./client/app.js'))
 
 //
-// Example endpoint (also tested in test/server/index_test.js)
-//
-routes.get('/api/tags-example', function(req, res) {
-  res.send(['node', 'express', 'browserify', 'mithril'])
-})
-
-//
 // Static assets (html, etc.)
 //
 var assetFolder = Path.resolve(__dirname, '../client/public')
 routes.use(express.static(assetFolder))
+routers.push(require('./apis/tutorial-api.js'));
 
 
 if (process.env.NODE_ENV !== 'test') {
-  //
+  // Load all routes
+  
   // The Catch-all Route
   // This is for supporting browser history pushstate.
   // NOTE: Make sure this route is always LAST.
@@ -44,7 +41,10 @@ if (process.env.NODE_ENV !== 'test') {
   app.use( require('body-parser').json() )
 
   // Mount our main router
-  app.use('/', routes)
+  routers.push(routes);
+  routers.forEach(function(router){
+    app.use('/', router);
+  });
 
   // Start the server!
   var port = process.env.PORT || 4000
@@ -52,6 +52,8 @@ if (process.env.NODE_ENV !== 'test') {
   console.log("Listening on port", port)
 }
 else {
+
   // We're in test mode; make this file importable instead.
-  module.exports = routes
+  routers.push(routes);
+  module.exports = routers;
 }

@@ -29,6 +29,7 @@ global.TestHelper = {}
 // Mock apps for API testing
 //
 var express = require('express')
+var routers = require(__server + '/index.js');
 
 TestHelper.createApp = function (loader) {
   var app = express()
@@ -42,7 +43,14 @@ TestHelper.createApp = function (loader) {
       next(err)
     })
   }
+  TestHelper.loadRoutes(app);
   return app
+}
+
+TestHelper.loadRoutes = function(app) {
+  routers.forEach(function(router){
+    app.use('/', router);
+  });
 }
 
 //

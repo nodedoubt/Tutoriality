@@ -5,7 +5,6 @@ var Path = require('path')
 var routes = express.Router();
 var routers = [];
 
-
 //
 // Provide a browserified file at a specified path
 //
@@ -50,6 +49,7 @@ if (process.env.NODE_ENV !== 'test') {
   var port = process.env.PORT || 4000
   app.listen(port)
   console.log("Listening on port", port)
+  module.exports = routes;
 }
 else {
 

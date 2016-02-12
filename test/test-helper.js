@@ -42,6 +42,7 @@ TestHelper.createApp = function (loader) {
       console.error("   " + err.stack)
       next(err)
     })
+    TestHelper.loadRoutes(app);
   }
   // TestHelper.loadRoutes(app);
   return app

@@ -5,9 +5,7 @@ var routes = require(__server + '/index.js');
 
 describe("The Tutorial API", function() {
   var app = TestHelper.createApp();
-   app.use('/', routes);
   app.testReady();
-
   it_("other all tutorials on get '/api/tutorials'", function * () {
     // Notice how we're in a generator function (indicated by the the *)
     // See test/test-helper.js for details of why this works.

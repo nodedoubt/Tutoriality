@@ -1,7 +1,11 @@
-// require database
+var db = require('../lib/db.js')
 var Tutorial = {};
 module.exports = Tutorial;
 
+var collection = function() {
+	return db.collection('tutorials')
+}
+
 Tutorial.insert = function(tutorial) {
-	// insert into database here
+	return Promise.resolve(['test']);
 }

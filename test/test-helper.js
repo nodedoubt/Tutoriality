@@ -29,7 +29,7 @@ global.TestHelper = {}
 // Mock apps for API testing
 //
 var express = require('express')
-var routers = require(__server + '/index.js');
+var routes = require(__server + '/index.js');
 
 TestHelper.createApp = function (loader) {
   var app = express()
@@ -42,15 +42,15 @@ TestHelper.createApp = function (loader) {
       console.error("   " + err.stack)
       next(err)
     })
+    TestHelper.loadRoutes(app);
   }
-  TestHelper.loadRoutes(app);
+  // TestHelper.loadRoutes(app);
   return app
 }
 
+
 TestHelper.loadRoutes = function(app) {
-  routers.forEach(function(router){
-    app.use('/', router);
-  });
+    app.use('/', routes);
 }
 
 //
@@ -62,17 +62,8 @@ TestHelper.loadRoutes = function(app) {
 //
 var Bluebird = require('bluebird')
 
-var originalIt = it
-it = function(title, test) {
-
-  // If the test is a generator function - run it using suspend
-  if (test.constructor.name === 'GeneratorFunction') {
-    originalIt(title, function() {
-      return Bluebird.coroutine(test)()
-    })
-  }
-  // Otherwise use the original implementation
-  else {
-    originalIt(title, test)
-  }
-}
+global.before_ = function (f) { before ( Bluebird.coroutine(f) ) }
+global.beforeEach_ = function (f) { beforeEach ( Bluebird.coroutine(f) ) }
+global.it_ = function (description, f) { it ( description, Bluebird.coroutine(f) ) }
+global.xit_ = function (description, f) { xit ( description, f ) }
+global.it_.only = function (description, f) { it.only( description, Bluebird.coroutine(f) ) }

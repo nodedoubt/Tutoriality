@@ -8,9 +8,9 @@ Nav.controller = function () {
 };
 
 Nav.view = function (ctrl, options) {
-  return m("div", {class: "navbar"}, [
+  return m("div.navbar", [
 
-    m("ul", {class: "nav"}, [
+    m("ul.nav", [
       m('h2', "hello nav"),
 
       m("li",  m("a[href='/']", {config: m.route}, "Home")),

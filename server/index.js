@@ -3,7 +3,6 @@ var express = require('express')
 var Path = require('path')
 
 var routes = express.Router();
-var routers = [];
 
 //
 // Provide a browserified file at a specified path
@@ -11,15 +10,17 @@ var routers = [];
 routes.get('/app-bundle.js',
   browserify('./client/app.js'))
 
+routes.use('/api', require('./apis/tutorial-api'));
+
 //
 // Static assets (html, etc.)
 //
 var assetFolder = Path.resolve(__dirname, '../client/public')
 routes.use(express.static(assetFolder))
-routers.push(require('./apis/tutorial-api.js'));
 
 
 if (process.env.NODE_ENV !== 'test') {
+  
   // Load all routes
   
   // The Catch-all Route
@@ -40,20 +41,15 @@ if (process.env.NODE_ENV !== 'test') {
   app.use( require('body-parser').json() )
 
   // Mount our main router
-  routers.push(routes);
-  routers.forEach(function(router){
-    app.use('/', router);
-  });
+  app.use('/', routes);
 
   // Start the server!
   var port = process.env.PORT || 4000
   app.listen(port)
   console.log("Listening on port", port)
-  module.exports = routes;
 }
 else {
 
   // We're in test mode; make this file importable instead.
-  routers.push(routes);
-  module.exports = routers;
+  module.exports = routes;
 }

@@ -15,6 +15,7 @@
     "browserify-middleware": "^5.0.2",
     "express": "^4.12.4",
     "mithril": "^0.2.0",
+    "mithril-query": "^0.9.1",
     "promised-mongo": "^1.2.0"
   },
   "devDependencies": {

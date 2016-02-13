@@ -8,7 +8,7 @@ Layout.controller = function () {
 };
 
 Layout.view = function (ctrl, options) {
-  return m('.Layout', [
+  return m('div.container', [
     m('h2', 'hello layout')
   ]);
 };

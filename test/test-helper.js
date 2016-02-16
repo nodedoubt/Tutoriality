@@ -1,3 +1,4 @@
+
 process.env.NODE_ENV = 'test'
 
 // The following allows you to require files independent of
@@ -7,6 +8,8 @@ process.env.NODE_ENV = 'test'
 //
 global.__server = __dirname + '/../server'
 global.__client = __dirname + '/../client'
+
+var db = require(__server + '/lib/db.js');
 
 //
 // Assertions
@@ -23,7 +26,11 @@ global.expect = chai.expect
 //
 // This is the object you can attach any helper functions used across
 // several test files.
-global.TestHelper = {}
+global.TestHelper = { 
+  emptyDatabase : function() {
+    return db.deleteEverything();
+  }
+}
 
 //
 // Mock apps for API testing
@@ -34,22 +41,17 @@ var routes = require(__server + '/index.js');
 TestHelper.createApp = function (loader) {
   var app = express()
   app.use(require('body-parser').json())
-
-  app.testReady = function () {
-    // Log all errors
-    app.use(function (err, req, res, next) {
-      console.error("==Error==")
-      console.error("   " + err.stack)
-      next(err)
-    })
-    TestHelper.loadRoutes(app);
-  }
-  // TestHelper.loadRoutes(app);
+  TestHelper.loadRoutes(app);
   return app
 }
 
 
 TestHelper.loadRoutes = function(app) {
+    routes.use(function(err, req, res, next){
+      console.error("==Error==")
+      console.error("   " + err.stack)
+      next(err)
+    });
     app.use('/', routes);
 }
 

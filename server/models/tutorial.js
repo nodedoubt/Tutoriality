@@ -7,5 +7,23 @@ var collection = function() {
 }
 
 Tutorial.insert = function(tutorial) {
-	return Promise.resolve(['test']);
+	return collection().insert(tutorial);
+}
+
+Tutorial.find = function(query) {
+	var query = query || {};
+	// the id can be undefined
+	return collection().find(query);
+}
+
+Tutorial.findByID = function(id) {
+	return collection().findOne({_id : id});
+}
+
+Tutorial.update = function(query, updateFields) {
+	return collection().update(query, {$set : updateFields});
+}
+
+Tutorial.updateByID = function(id, updateFields) {
+	return Tutorial.update({_id : id}, updateFields);
 }

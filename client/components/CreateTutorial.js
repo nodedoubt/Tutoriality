@@ -16,9 +16,6 @@ CreateTutorial.view = function (ctrl, options) {
 
 }
 
-var subViews = function(ctrl) {
-  return m('')
-}
 
 var createTemplate = function() {
   return m('.CreateTutorial', [

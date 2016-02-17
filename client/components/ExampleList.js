@@ -1,10 +1,10 @@
 var m              = require('mithril')
 var Accordion = require('./Accordion.js');
 var ExampleList = module.exports;
+var Tutorial = require('../models/tutorials.js');
 
 
 ExampleList.controller = function () {
-  	
   	var ctrl = this;
   	
   	// this is the data we're going to pass into the abstract accordion view

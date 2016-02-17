@@ -17,5 +17,4 @@ m.route(document.getElementById('app'), '/', {
   '/create' : require('./components/CreateTutorial'),
   '/read'   : require('./components/ReadTutorial'),
   '/example-list' : require('./components/ExampleList'),
-
 })

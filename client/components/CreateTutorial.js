@@ -1,4 +1,5 @@
-var m              = require('mithril')
+var m              = require('mithril');
+var Nav            = require('./Nav');
 var CreateTutorial = module.exports;
 
 CreateTutorial.controller = function () {
@@ -8,6 +9,18 @@ CreateTutorial.controller = function () {
 }
 
 CreateTutorial.view = function (ctrl, options) {
+ return m('div', [
+      Nav.view(),
+      createTemplate()
+    ]);
+
+}
+
+var subViews = function(ctrl) {
+  return m('')
+}
+
+var createTemplate = function() {
   return m('.CreateTutorial', [
 
     m('h2', 'Create Tutorial'),
@@ -42,8 +55,4 @@ CreateTutorial.view = function (ctrl, options) {
           ])
         ])
     ])
-}
-
-var subViews = function(ctrl) {
-  return m('')
 }

@@ -47,7 +47,8 @@ var createTemplate = function() {
           m('form', 'Step: ', { type: 'text' }, [
             m('br'),
             m('textarea.form-control', { rows:'3', type:'text', placeholder:'Step it out!', style: 'width:75%; height:175px ' }),
-
+            m('br'),
+            m('button', 'Add Step', { type: 'submit' } ),
             ])
           ])
         ])

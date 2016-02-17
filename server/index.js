@@ -7,8 +7,7 @@ var routes = express.Router();
 //
 // Provide a browserified file at a specified path
 //
-routes.get('/app-bundle.js',
-  browserify('./client/app.js'))
+routes.get('/app-bundle.js', browserify('./client/app.js'))
 
 routes.use('/api', require('./apis/tutorial-api'));
 
@@ -20,9 +19,9 @@ routes.use(express.static(assetFolder))
 
 
 if (process.env.NODE_ENV !== 'test') {
-  
+
   // Load all routes
-  
+
   // The Catch-all Route
   // This is for supporting browser history pushstate.
   // NOTE: Make sure this route is always LAST.

@@ -9,14 +9,14 @@ Nav.view = function (ctrl, options) {
   return m('nav.navbar.navbar-default', [
     m('div.container-fluid', [
       m('div.navbar-header', [
-        m('a.navbar-brand[href="#"]', 'Tutoriality')
+        m('a.navbar-brand[href="/"]', {config: m.route}, 'Tutoriality')
       ]),
       m('ul.nav.nav-pills.navbar-right', [
         m('li[role=presentation].active', [
-          m('a[href="#"]', 'Create')
+          m('a[href="/create"]', {config: m.route}, 'Create')
         ]),
         m('li[role=presentation]', [
-          m('a[href="#"]', 'Sign Out')
+          m('a[href="/"]', {config: m.route}, 'Sign Out')
         ])
       ])
     ]),

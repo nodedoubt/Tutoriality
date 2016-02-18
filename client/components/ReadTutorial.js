@@ -10,17 +10,16 @@ Read.view = function (ctrl, options) {
     return m('.read', [
         Nav.view(),
         readTitle(),
-        editBtn(),
         readSubView()
     ]);
 };
 
 var readTitle = function() {
-    return m('div.title', [
+    return m('legend', [
         m('h2', "Tutorial Title"),
-        // m('div', editBtn()),
         m('br'),
-        m('p', 'Description/Content of the tutorial')
+        m('p', 'Description/Content of the tutorial'),
+        m('div', editBtn())
     ]) //close div.title
 }
 

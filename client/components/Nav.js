@@ -15,7 +15,7 @@ Nav.view = function (ctrl, options) {
         m('li[role=presentation].active', [
           m('a[href="/create"]', {config: m.route}, 'Create')
         ]),
-        m('li[role=presentation]', [
+        m('li[role=presentation].active', [
           m('a[href="/"]', {config: m.route}, 'Sign Out')
         ])
       ])

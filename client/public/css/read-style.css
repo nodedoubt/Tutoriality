@@ -1,0 +1,30 @@
+.read {
+  text-align: center;
+}
+
+div.title > h2 {
+	color: 1C5F75;
+	text-align:center;
+	font-size:30px;
+	font-weight: bold;
+}
+
+div.btn {
+	float: right;
+}
+
+.content-area {
+  width: 90%;
+  margin: 0 auto;
+  height: 500px;
+  background-color: #f2f2f2;
+  border: 1px solid #eee;
+}
+
+/*div.title {
+  width: 90%;
+  margin: 0 auto;
+  height: 500px;
+  background-color: #f2f2f2;
+  border: 1px solid #eee;
+}*/

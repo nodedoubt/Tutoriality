@@ -1,0 +1,14 @@
+/* Specific/overridden styles for Tutorialy */
+
+/* Add some padding top for center alignment in our header */
+.nav {
+  padding-top: 5px;
+}
+
+.content-area {
+  width: 90%;
+  margin: 0 auto;
+  height: 500px;
+  background-color: #f2f2f2;
+  border: 1px solid #eee;
+}

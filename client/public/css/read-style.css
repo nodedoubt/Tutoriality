@@ -1,19 +1,28 @@
-.read {
+/*.read {
   text-align: center;
 }
-
-div.title > h2 {
+*/
+.title > h2 {
 	color: 1C5F75;
 	text-align:center;
 	font-size:30px;
 	font-weight: bold;
+	margin: 0 auto;
+}
+
+.title > p {
+    text-align: center;
 }
 
 div.btn {
 	float: right;
+	margin: -54px;
+	margin-right: 52px;
+	/*width:22%;*/
 }
 
 .content-read {
+  text-align:left;
   width: 90%;
   margin: 0 auto;
   /*height: 500px;*/

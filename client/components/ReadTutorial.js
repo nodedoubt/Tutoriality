@@ -10,6 +10,7 @@ Read.view = function (ctrl, options) {
     return m('.read', [
         Nav.view(),
         readTitle(),
+        editBtn(),
         readSubView()
     ]);
 };
@@ -17,7 +18,7 @@ Read.view = function (ctrl, options) {
 var readTitle = function() {
     return m('div.title', [
         m('h2', "Tutorial Title"),
-        m('div', editBtn()),
+        // m('div', editBtn()),
         m('br'),
         m('p', 'Description/Content of the tutorial')
     ]) //close div.title
@@ -70,13 +71,13 @@ var readSteps = function() {
                     ])
                 ])
             ])  //close .panel.panel-default 'step - three'
-     ]) //close .panel-group
-  ]) //close div.steps
+     ]) 
+  ]) 
 }
 
 var editBtn = function() {
     return m('div.btn', [
-        m('button.btn.btn-primary.btn-sm', { 'data-target': '#myModal', 'data-toggle': 'modal', type: 'button' }, [
+        m('button.btn.btn-primary.btn-md', { 'data-target': '#myModal', 'data-toggle': 'modal', type: 'button' }, [
             m('div.edit', 'Edit')
          ]),
         m('.modal.fade', { 'aria-labelledby': 'myModalLabel', id: 'myModal', role: 'dialog', tabindex: '-1' },  [
@@ -84,24 +85,33 @@ var editBtn = function() {
                 m('.modal-content', [
                     m('.modal-header', [
                         m('button.close', { 'aria-label': 'Close', 'data-dismiss': 'modal', type: 'button' }, [
-                            m('span', { 'aria-hidden': true }, 'x')]), //close button.close
+                            m('span', { 'aria-hidden': true }, 'x')]), 
                         m('h4.modal-title', { id: 'myModalLabel' }, "Edit Tutorial")
-                    ]), //close .modal-header
+                    ]), 
                     m('.modal-body', [
-
+                        m('textarea', { rows:'3', type:'text', style: 'width:75%; height:175px', value: 'val' }) //trying to create edit
                     ]), //close .modal-body
                     m('.modal-footer', [
                         m('button.btn.btn-default', { 'data-dismiss': 'modal', type: 'button' }, "Close"),
                         m('button.btn.btn-primary', { type: 'button' }, "Save Changes")
-                    ]) //close .modal-footer
-
+                    ]) 
                 ]) // close .modal-content
-
-            ]) //close .modal-dialog
-
-         ]) //close .modal.fade
+            ]) 
+         ])
     ])
 }
+
+// var progressBar = function() {
+//     m(".progress", [
+//             m(".progress-bar[aria-valuemax='100'][aria-valuemin='0'][aria-valuenow='60'][role='progressbar']", {style: {"width": " 60%"}}, [
+//             60%
+//             ])
+//         ])
+// }
+
+
+
+var editForm = m.prop(readSteps())
 
 var readSubView = function() {
   return m('div.content-read', readSteps())

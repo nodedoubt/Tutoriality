@@ -104,7 +104,7 @@ var editBtn = function() {
 }
 
 var readSubView = function() {
-  return m('div.content-area', readSteps())
+  return m('div.content-read', readSteps())
 }
 
 

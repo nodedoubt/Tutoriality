@@ -19,7 +19,7 @@ ExampleList.controller = function () {
 
 
 ExampleList.view = function (ctrl, options) {
-	
+
 	// Pass in a sections array with all of the sections for the accordion
 	// the id is required by bootstrap, so we just create one here
 	var options = {

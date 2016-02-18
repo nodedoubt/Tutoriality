@@ -18,7 +18,7 @@ var readTitle = function() {
     return m('legend', [
         m('h2', "Tutorial Title"),
         m('br'),
-        m('p', 'Description/Content of the tutorial'),
+        m('p', 'Description of the tutorial'),
         m('div', editBtn())
     ]) //close div.title
 }

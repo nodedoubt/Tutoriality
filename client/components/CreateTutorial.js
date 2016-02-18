@@ -13,6 +13,7 @@ CreateTutorial.view = function (ctrl, options) {
       Nav.view(),
       createTemplate(),
       addStep()
+      // createTemplate()
     ]);
 
 }
@@ -50,11 +51,13 @@ var createTemplate = function() {
             m('textarea.form-control', { rows:'3', type:'text', placeholder:'Step it out!', style: 'width:75%; height:175px ' }),
             m('br'),
             m('button', 'Add Step', { type: 'submit', onclick:function(e){ e.preventDefault(); addStep() } }),
+
             ])
           ])
         ])
     ])
 }
+
 
 var addStep = function() {
   return m('div', [
@@ -74,3 +77,4 @@ var addStep = function() {
           ])
         ])
 }
+

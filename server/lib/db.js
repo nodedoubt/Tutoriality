@@ -2,6 +2,7 @@ var pmongo = require('promised-mongo');
 var dbName = process.env.NODE_ENV === 'test' ? 'test' : 'local';
 var db = pmongo(dbName);
 var _ = require('underscore');
+
 db.deleteEverything = function () {
   return Promise.all([
     db.collection('tutorials').remove(),

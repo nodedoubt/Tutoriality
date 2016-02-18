@@ -1,0 +1,45 @@
+/*.read {
+  text-align: center;
+}
+*/
+
+/*body {
+	background-color: beige;
+}*/
+
+legend > h2 {
+	color: 1C5F75;
+	text-align:center;
+	font-size:32px;
+	font-weight: bold;
+	margin: 0 auto;
+}
+
+legend > p {
+    text-align: center;
+	margin: 0 auto;
+}
+
+div.btn {
+	float: right;
+	margin: -54px;
+	margin-right: 52px;
+	/*width:22%;*/
+}
+
+.content-read {
+  text-align:left;
+  width: 90%;
+  margin: 0 auto;
+  /*height: 500px;*/
+  background-color: #f2f2f2;
+  /*border: 1px solid #eee;*/
+}
+
+h3 {
+	font-size: 16px;
+}
+
+.panel-body {
+	text-align: center;
+}

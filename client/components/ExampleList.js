@@ -1,41 +1,20 @@
-var m              = require('mithril')
+var m              = require('mithril');
 var Accordion = require('./Accordion.js');
 var ExampleList = module.exports;
-
+var Tutorial = require('../models/tutorials');
+var _ = require('underscore');
 
 ExampleList.controller = function () {
-  	
   	var ctrl = this;
-  	
-  	// this is the data we're going to pass into the abstract accordion view
-  	var sections = [
-		{
-			// The accordion title to click on
-			title : "Test one",
-
-			// the content that will be inside of the accordion
-			content : m('.test-content', "This is some test content"),
-		},
-		{
-			title : "Test two",
-			content : m('.test-content', "This is some other content"),
-		},
-	];
-	ctrl.tutorials = sections;
-
-	// to demonstrate that updating works correctly
-	// wait 3 seconds and then update content
-	setTimeout(function(){
-		ctrl.tutorials[0].title = "Updated title";
-		ctrl.tutorials.push({
-			title : "Test three",
-			content : m('.new-stuff', "Updated new content"),
+  	ctrl.tutorials = [];
+	Tutorial.fetchAll().then(function(tutorials){
+		ctrl.tutorials = _.map(tutorials, function(tutorial){
+			return {
+				title : tutorial.title,
+				content : m('.test-content', tutorial.description),
+			};
 		});
-
-		// trigger a redraw so the view updates
-		m.redraw();
-	}, 3000);
-
+	});
 }
 
 

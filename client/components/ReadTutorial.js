@@ -4,6 +4,7 @@ var Read = module.exports;
 
 Read.controller = function () {
   var ctrl = this;
+
   };
 
 Read.view = function (ctrl, options) {
@@ -32,13 +33,13 @@ var readSteps = function() {
                     m('a', { 'aria-controls': 'collapseOne', 'aria-expanded': 'false', 'data-parent': '#accordion', 'data-toggle': 'collapse', href: '#collapseOne', role: 'button' }, [
                         m('h3', 'Step #1')
                     ])
-                  ]) 
+                  ])
                 ]),
             m('.panel-collapse.collapse', { 'aria-labelledby': 'headingOne', id: 'collapseOne', role: 'tabpanel' }, [
                 m('.panel-body', [
                     m('p', 'these are the steps')
                   ])
-                ]) 
+                ])
             ]), //close .panel.panel-default 'step - one'
 
         m(".panel.panel-default", [
@@ -70,8 +71,8 @@ var readSteps = function() {
                     ])
                 ])
             ])  //close .panel.panel-default 'step - three'
-     ]) 
-  ]) 
+     ])
+  ])
 }
 
 var editBtn = function() {
@@ -84,18 +85,18 @@ var editBtn = function() {
                 m('.modal-content', [
                     m('.modal-header', [
                         m('button.close', { 'aria-label': 'Close', 'data-dismiss': 'modal', type: 'button' }, [
-                            m('span', { 'aria-hidden': true }, 'x')]), 
+                            m('span', { 'aria-hidden': true }, 'x')]),
                         m('h4.modal-title', { id: 'myModalLabel' }, "Edit Tutorial")
-                    ]), 
+                    ]),
                     m('.modal-body', [
                         m('textarea', { rows:'3', type:'text', style: 'width:75%; height:175px', value: 'val' }) //trying to create edit
                     ]), //close .modal-body
                     m('.modal-footer', [
                         m('button.btn.btn-default', { 'data-dismiss': 'modal', type: 'button' }, "Close"),
                         m('button.btn.btn-primary', { type: 'button' }, "Save Changes")
-                    ]) 
+                    ])
                 ]) // close .modal-content
-            ]) 
+            ])
          ])
     ])
 }
@@ -115,17 +116,4 @@ var editForm = m.prop(readSteps())
 var readSubView = function() {
   return m('div.content-read', readSteps())
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 

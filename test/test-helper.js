@@ -1,3 +1,4 @@
+
 process.env.NODE_ENV = 'test'
 
 // The following allows you to require files independent of
@@ -7,6 +8,8 @@ process.env.NODE_ENV = 'test'
 //
 global.__server = __dirname + '/../server'
 global.__client = __dirname + '/../client'
+
+var db = require(__server + '/lib/db.js');
 
 //
 // Assertions
@@ -23,26 +26,33 @@ global.expect = chai.expect
 //
 // This is the object you can attach any helper functions used across
 // several test files.
-global.TestHelper = {}
+global.TestHelper = { 
+  emptyDatabase : function() {
+    return db.deleteEverything();
+  }
+}
 
 //
 // Mock apps for API testing
 //
 var express = require('express')
+var routes = require(__server + '/index.js');
 
 TestHelper.createApp = function (loader) {
   var app = express()
   app.use(require('body-parser').json())
+  TestHelper.loadRoutes(app);
+  return app
+}
 
-  app.testReady = function () {
-    // Log all errors
-    app.use(function (err, req, res, next) {
+
+TestHelper.loadRoutes = function(app) {
+    routes.use(function(err, req, res, next){
       console.error("==Error==")
       console.error("   " + err.stack)
       next(err)
-    })
-  }
-  return app
+    });
+    app.use('/', routes);
 }
 
 //
@@ -54,17 +64,8 @@ TestHelper.createApp = function (loader) {
 //
 var Bluebird = require('bluebird')
 
-var originalIt = it
-it = function(title, test) {
-
-  // If the test is a generator function - run it using suspend
-  if (test.constructor.name === 'GeneratorFunction') {
-    originalIt(title, function() {
-      return Bluebird.coroutine(test)()
-    })
-  }
-  // Otherwise use the original implementation
-  else {
-    originalIt(title, test)
-  }
-}
+global.before_ = function (f) { before ( Bluebird.coroutine(f) ) }
+global.beforeEach_ = function (f) { beforeEach ( Bluebird.coroutine(f) ) }
+global.it_ = function (description, f) { it ( description, Bluebird.coroutine(f) ) }
+global.xit_ = function (description, f) { xit ( description, f ) }
+global.it_.only = function (description, f) { it.only( description, Bluebird.coroutine(f) ) }

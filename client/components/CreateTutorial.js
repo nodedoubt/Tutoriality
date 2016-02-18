@@ -11,7 +11,8 @@ CreateTutorial.controller = function () {
 CreateTutorial.view = function (ctrl, options) {
  return m('div', [
       Nav.view(),
-      createTemplate()
+      createTemplate(),
+      addStep()
     ]);
 
 }
@@ -48,9 +49,28 @@ var createTemplate = function() {
             m('br'),
             m('textarea.form-control', { rows:'3', type:'text', placeholder:'Step it out!', style: 'width:75%; height:175px ' }),
             m('br'),
-            m('button', 'Add Step', { type: 'submit' } ),
+            m('button', 'Add Step', { type: 'submit', onclick:function(e){ e.preventDefault(); addStep() } }),
             ])
           ])
         ])
     ])
+}
+
+var addStep = function() {
+  return m('div', [
+        m('fieldset', { style: 'margin-right: 33%;'}, [
+          m('legend', 'Step Information'),
+          m('form', 'Description:', { type: 'text' }, [
+            m('br'),
+            m('input', { type: 'text', placeholder: 'Give a short description of step', style: 'width: 54%' })
+          ]),
+
+          m('form', 'Step: ', { type: 'text' }, [
+            m('br'),
+            m('textarea.form-control', { rows:'3', type:'text', placeholder:'Step it out!', style: 'width:75%; height:175px ' }),
+            m('br'),
+            m('button', 'Add Step', { type: 'submit', onclick: '' } ),
+            ])
+          ])
+        ])
 }

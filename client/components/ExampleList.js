@@ -1,8 +1,6 @@
-var m              = require('mithril')
+var m              = require('mithril');
 var Accordion = require('./Accordion.js');
 var ExampleList = module.exports;
-var Tutorial = require('../models/tutorials.js');
-
 
 ExampleList.controller = function () {
   	var ctrl = this;

@@ -3,17 +3,16 @@ var Nav            = require('./Nav');
 var TutorialModel  = require('../models/TutorialModel')
 var CreateTutorial = module.exports;
 
-CreateTutorial.steps = [{Description: '', Instruction:''}]
+CreateTutorial.tutorial = { title: '', description: ''}
+CreateTutorial.tutorial.steps    = [{Title: '', Description:''}]
 
 CreateTutorial.controller = function () {
   var ctrl = this;
 
-  // ctrl.steps = [{Description: '', Instruction:''}]
+  ctrl.counter = 0;
 
   ctrl.addStep = function(){
-    CreateTutorial.steps.push({ Description: '', Instruction:''})
-    console.log(ctrl.steps)
-    m.redraw();
+    CreateTutorial.tutorial.steps.push({ Title: '', Description:''})
   }
 
 
@@ -53,8 +52,6 @@ var createTemplate = function(ctrl, options) {
           m('div', [
             m('fieldset', { style: 'margin-right: 33%; margin-left: 10px;'}, [
               m('legend', 'Step Information'),
-                m('br'),
-                m('br')
             ])
           ])
          ])
@@ -64,7 +61,7 @@ var createTemplate = function(ctrl, options) {
 var makeSteps = function(ctrl) {
   return m('.steps', { style: 'margin-left: 10px;'}, [
 
-  CreateTutorial.steps.map(function(step){
+  CreateTutorial.tutorial.steps.map(function(step){
     return m('form', 'Description:', { type: 'text',  style: 'margin-right: 33%;' }, [
             m('br'),
             m('input', { type: 'text', placeholder: 'Give a short description of step', style: 'width: 54%' }),
@@ -82,7 +79,7 @@ var buttons = function(ctrl){
   return m('.buttons', [
             m('button', {
               type:'submit',
-              onclick:  function(e){ e.preventDefault(); return ctrl.addStep() }
+              onclick:  function(e){ e.preventDefault(); ctrl.counter++; console.log(ctrl.counter); return ctrl.addStep();  }
               }, 'Add Step'),
             m('button', {
               type: 'submit',

@@ -3,15 +3,17 @@ var Nav            = require('./Nav');
 var TutorialModel  = require('../models/TutorialModel')
 var CreateTutorial = module.exports;
 
+CreateTutorial.steps = [{Description: '', Instruction:''}]
+
 CreateTutorial.controller = function () {
   var ctrl = this;
 
-  ctrl.steps = [{Description: '', Instruction:''}, {}, {}]
+  // ctrl.steps = [{Description: '', Instruction:''}]
 
   ctrl.addStep = function(){
-    ctrl.steps.push({ Description: '', Instruction:''})
+    CreateTutorial.steps.push({ Description: '', Instruction:''})
     console.log(ctrl.steps)
-    m.redraw()
+    m.redraw();
   }
 
 
@@ -31,37 +33,43 @@ CreateTutorial.view = function (ctrl, options) {
 
 var createTemplate = function(ctrl, options) {
   return m('.CreateTutorial', [
+            m('h2', 'Create Tutorial'),
 
-    m('h2', 'Create Tutorial'),
+          m('div', [
+            m('fieldset', { style:'margin-right: 35%; margin-left: 10px;' }, [
+              m('legend', 'Tutorial Information'),
+                m('form', 'Title: ', { type: 'text' }, [
+                  m('br'),
+                  m('input', { type: 'text', placeholder: 'Enter Title', style: 'width: 55%;' })
+                ]),
+                m('form', 'Description: ', { type: 'text' }, [
+                  m('br'),
+                  m('input', { type: 'text', placeholder: 'Enter Description', style: 'width: 55%;' })
+                ])
+            ]),
+          ]),
 
-    m('div', [
-      m('fieldset', { style:'margin-right: 35%; margin-left: 10px;' }, [
-        m('legend', 'Tutorial Information'),
-        m('form', 'Title: ', { type: 'text' }, [
           m('br'),
-          m('input', { type: 'text', placeholder: 'Enter Title', style: 'width: 55%;' })
-        ]),
-        m('form', 'Description: ', { type: 'text' }, [
-          m('br'),
-          m('input', { type: 'text', placeholder: 'Enter Description', style: 'width: 55%;' })
-        ])
-      ]),
-    ]),
-    m('br'),
-    m('div', [
-        m('fieldset', { style: 'margin-right: 33%;'}, [
-          m('legend', 'Step Information'),
-        ])
-    ])
-])
+          m('div', [
+            m('fieldset', { style: 'margin-right: 33%; margin-left: 10px;'}, [
+              m('legend', 'Step Information'),
+                m('button', {
+                  type:'submit',
+                  onclick:  function(e){ e.preventDefault(); return ctrl.addStep() }
+                  }, 'Add Step'),
+                m('br'),
+                m('br')
+            ])
+          ])
+         ])
 }
 
 
 var makeSteps = function(ctrl) {
-  return m('.steps', [
+  return m('.steps', { style: 'margin-left: 10px;'}, [
 
-  ctrl.steps.map(function(step){
-    return m('form', 'Description:', { type: 'text',  style: 'margin-right: 33%; margin-left: 10px;' }, [
+  CreateTutorial.steps.map(function(step){
+    return m('form', 'Description:', { type: 'text',  style: 'margin-right: 33%;' }, [
             m('br'),
             m('input', { type: 'text', placeholder: 'Give a short description of step', style: 'width: 54%' }),
             m('br'),
@@ -69,11 +77,9 @@ var makeSteps = function(ctrl) {
             m('form', 'Step: ', { type: 'text' }),
             m('textarea.form-control', { rows:'3', type:'text', placeholder:'Step it out!', style: 'width:75%; height:175px ' }),
             m('br'),
-
-            m('button', 'Add Step', { type:'submit', onclick: function(e){ e.preventDefault(); ctrl.addStep()  } }),
-            ])
-        })
-  ])
+           ])
+         })
+       ])
 }
 
 

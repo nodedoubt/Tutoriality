@@ -25,7 +25,7 @@ CreateTutorial.view = function (ctrl, options) {
       Nav.view(),
       createTemplate(ctrl),
       makeSteps(ctrl),
-      // createTemplate()
+      buttons(ctrl)
     ]);
 
 }
@@ -53,10 +53,6 @@ var createTemplate = function(ctrl, options) {
           m('div', [
             m('fieldset', { style: 'margin-right: 33%; margin-left: 10px;'}, [
               m('legend', 'Step Information'),
-                m('button', {
-                  type:'submit',
-                  onclick:  function(e){ e.preventDefault(); return ctrl.addStep() }
-                  }, 'Add Step'),
                 m('br'),
                 m('br')
             ])
@@ -80,6 +76,20 @@ var makeSteps = function(ctrl) {
            ])
          })
        ])
+}
+
+var buttons = function(ctrl){
+  return m('.buttons', [
+            m('button', {
+              type:'submit',
+              onclick:  function(e){ e.preventDefault(); return ctrl.addStep() }
+              }, 'Add Step'),
+            m('button', {
+              type: 'submit',
+              onclick: function(e) { e.preventDefault(); console.log('Commit Tutorial To Database')}
+            }, 'Save')
+
+    ])
 }
 
 

@@ -39,11 +39,21 @@ var createTemplate = function(ctrl, options) {
               m('legend', 'Tutorial Information'),
                 m('form', 'Title: ', { type: 'text' }, [
                   m('br'),
-                  m('input', { type: 'text', placeholder: 'Enter Title', style: 'width: 55%;' })
+                  m('input', {
+                    type: 'text',
+                    placeholder: 'Enter Title',
+                    style: 'width: 55%;',
+                    oninput: function() { CreateTutorial.tutorial.title = this.value }
+                  })
                 ]),
                 m('form', 'Description: ', { type: 'text' }, [
                   m('br'),
-                  m('input', { type: 'text', placeholder: 'Enter Description', style: 'width: 55%;' })
+                  m('input', {
+                    type: 'text',
+                    placeholder: 'Enter Description',
+                    style: 'width: 55%;',
+                    oninput: function() { CreateTutorial.tutorial.description = this.value }
+                  })
                 ])
             ]),
           ]),
@@ -64,11 +74,22 @@ var makeSteps = function(ctrl) {
   CreateTutorial.tutorial.steps.map(function(step){
     return m('form', 'Description:', { type: 'text',  style: 'margin-right: 33%;' }, [
             m('br'),
-            m('input', { type: 'text', placeholder: 'Give a short description of step', style: 'width: 54%' }),
+            m('input', {
+              type: 'text',
+              placeholder: 'Give a short description of step',
+              style: 'width: 54%',
+              oninput: function() { CreateTutorial.tutorial.steps[ctrl.counter].Title = this.value }
+               }),
             m('br'),
             m('br'),
             m('form', 'Step: ', { type: 'text' }),
-            m('textarea.form-control', { rows:'3', type:'text', placeholder:'Step it out!', style: 'width:75%; height:175px ' }),
+            m('textarea.form-control', {
+              rows:'3',
+              type:'text',
+              placeholder:'Step it out!',
+              style: 'width:75%; height:175px ',
+              oninput: function() { CreateTutorial.tutorial.steps[ctrl.counter].Description = this.value }
+               }),
             m('br'),
            ])
          })
@@ -83,7 +104,7 @@ var buttons = function(ctrl){
               }, 'Add Step'),
             m('button', {
               type: 'submit',
-              onclick: function(e) { e.preventDefault(); console.log('Commit Tutorial To Database')}
+              onclick: function(e) { e.preventDefault(); console.log('Commit Tutorial To Database'); console.log(CreateTutorial.tutorial) }
             }, 'Save')
 
     ])

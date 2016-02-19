@@ -9,7 +9,7 @@ CreateTutorial.tutorial.steps    = [{Title: '', Description:''}]
 CreateTutorial.controller = function () {
   var ctrl = this;
 
-  ctrl.counter = 0;
+  ctrl.counter = 1;
 
   ctrl.addStep = function(){
     CreateTutorial.tutorial.steps.push({ Title: '', Description:''})
@@ -78,17 +78,17 @@ var makeSteps = function(ctrl) {
               type: 'text',
               placeholder: 'Give a short description of step',
               style: 'width: 54%',
-              oninput: function() { CreateTutorial.tutorial.steps[ctrl.counter].Title = this.value }
+              oninput: function() { CreateTutorial.tutorial.steps[ctrl.counter-1].Title = this.value }
                }),
             m('br'),
             m('br'),
-            m('form', 'Step: ', { type: 'text' }),
+            m('form', 'Step: ' + ctrl.counter, { type: 'text' }),
             m('textarea.form-control', {
               rows:'3',
               type:'text',
               placeholder:'Step it out!',
               style: 'width:75%; height:175px ',
-              oninput: function() { CreateTutorial.tutorial.steps[ctrl.counter].Description = this.value }
+              oninput: function() { CreateTutorial.tutorial.steps[ctrl.counter-1].Description = this.value }
                }),
             m('br'),
            ])

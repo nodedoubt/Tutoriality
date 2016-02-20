@@ -17,6 +17,7 @@
     "jquery": "^2.2.0",
     "mithril": "^0.2.0",
     "mithril-query": "^0.9.1",
+    "oauthio": "^0.3.3",
     "promised-mongo": "^1.2.0",
     "sinon": "^1.17.3",
     "underscore": "^1.8.3"

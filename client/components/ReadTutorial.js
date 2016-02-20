@@ -1,11 +1,11 @@
 var m = require('mithril');
 var Read = module.exports;
 var mainLayout = require('../layouts/main');
+var User = require('../models/users');
 
 Read.controller = function () {
-  var ctrl = this;
-
-  };
+  User.confirmLoggedIn();
+}
 
 Read.view = function (ctrl, options) {
     var view =  m('.read', [

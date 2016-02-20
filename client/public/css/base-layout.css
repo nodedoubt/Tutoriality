@@ -9,6 +9,27 @@
   width: 90%;
   margin: 0 auto;
   height: 500px;
-  background-color: #f2f2f2;
-  border: 1px solid #eee;
+  background-color: transparent;
+}
+
+.panel-title.list-link {
+  cursor: pointer;
+  text-decoration: underline;
+  color: #317eac;
+}
+
+/* Specific styles for the list view page */
+.listView h1 {
+  text-align: center;
+  font-weight: 200;
+  font-size: 28px;
+  letter-spacing: 1px;
+}
+
+.listView .page-header {
+  margin: 0;
+}
+
+.listView .content-area {
+  margin-top: 4em;
 }

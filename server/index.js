@@ -4,13 +4,19 @@ var Path = require('path')
 
 var routes = express.Router();
 
+var session = require('express-session');
+var uid = require('uid-safe');
+
 //
 // Provide a browserified file at a specified path
 //
-routes.get('/app-bundle.js', browserify('./client/app.js'))
+routes.get('/app-bundle.js', browserify('./client/app.js'));
 
-routes.use('/api', require('./apis/tutorial-api'));
+var apiRoutes = express.Router();
 
+apiRoutes.use('', require('./apis/tutorial-api'));
+apiRoutes.use('', require('./apis/auth-api'));
+routes.use('/api', apiRoutes);
 //
 // Static assets (html, etc.)
 //
@@ -38,6 +44,13 @@ if (process.env.NODE_ENV !== 'test') {
 
   // Parse incoming request bodies as JSON
   app.use( require('body-parser').json() )
+
+  app.use(session({
+    genid: function(req) {
+      return uid.sync(18) // use UUIDs for session IDs
+    },
+    secret: 'burger time',
+  }))
 
   // Mount our main router
   app.use('/', routes);

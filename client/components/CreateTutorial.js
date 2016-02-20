@@ -2,19 +2,18 @@ var m              = require('mithril');
 var TutorialModel  = require('../models/TutorialModel')
 var CreateTutorial = module.exports;
 var mainLayout = require('../layouts/main.js');
+var User = require('../models/users');
 
 CreateTutorial.tutorial = { title: '', description: ''}
 CreateTutorial.tutorial.steps    = [{Title: '', Description:''}]
 
 CreateTutorial.controller = function () {
   var ctrl = this;
-
   ctrl.counter = 1;
-
   ctrl.addStep = function(){
     CreateTutorial.tutorial.steps.push({ Title: '', Description:''})
   }
-
+  User.confirmLoggedIn();
 }
 
 CreateTutorial.view = function (ctrl, options) {

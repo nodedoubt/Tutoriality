@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var Tutorial = require('../models/tutorial.js');
-router.get('/tutorials', function(request, response){
+var OAuth = require('../lib/auth.js');
+
+router.get('/tutorials', OAuth.confirmLogin, function(request, response){
 	// run a find a without an id to get all tutorials
 	Tutorial.find().then(function(tutorials){
 		response.send(tutorials);

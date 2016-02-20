@@ -9,7 +9,6 @@ var mainLayout = require('../layouts/main');
 List.controller = function () {
   var ctrl = this;
   ctrl.tutorials = [];
-
   ctrl.tutorials = _.map(List.tutorials, function(tutorial) {
     return {
       id: tutorial.id,

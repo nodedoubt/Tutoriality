@@ -14,12 +14,14 @@
     "body-parser": "^1.14.1",
     "browserify-middleware": "^5.0.2",
     "express": "^4.12.4",
+    "express-session": "^1.13.0",
     "jquery": "^2.2.0",
     "mithril": "^0.2.0",
     "mithril-query": "^0.9.1",
     "oauthio": "^0.3.3",
     "promised-mongo": "^1.2.0",
     "sinon": "^1.17.3",
+    "uid-safe": "^2.1.0",
     "underscore": "^1.8.3"
   },
   "devDependencies": {

@@ -1,4 +1,5 @@
 var m = require('mithril');
+var User = require('../models/users');
 module.exports = function(body) {
 	return m('.main', [
 		navSubView(),
@@ -27,7 +28,12 @@ var navSubView = function() {
 					m('a[href="/create"]', {config: m.route}, 'Create')
 				]),
 				m('li[role=presentation].active', [
-					m('a[href="/"]', {config: m.route}, 'Sign Out')
+					m('a[href="/"]', {onclick : function(event){
+						event.preventDefault();
+						User.signOut().then(function(){
+							m.route('/sign-in');
+						});
+					}}, 'Sign Out')
 				])
 			])
 		]),

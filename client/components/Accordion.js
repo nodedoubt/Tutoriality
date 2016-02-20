@@ -14,7 +14,6 @@ Accordion.controller = function () {
 }
 
 Accordion.view = function (ctrl, options) {
-	
 	// Just for readability, split out all attributes into their own object
 	var attributes = {
 		id : options.id,

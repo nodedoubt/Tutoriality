@@ -31,6 +31,7 @@ CreateTutorial.view = function (ctrl, options) {
 
 
 var createTemplate = function(ctrl, options) {
+
   return m('.CreateTutorial', [
             m('h2', 'Create Tutorial'),
 
@@ -82,7 +83,7 @@ var makeSteps = function(ctrl) {
                }),
             m('br'),
             m('br'),
-            m('form', 'Step: ' + ctrl.counter, { type: 'text' }),
+            m('form', 'Step: ', { type: 'text' }),
             m('textarea.form-control', {
               rows:'3',
               type:'text',

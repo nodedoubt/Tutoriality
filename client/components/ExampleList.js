@@ -2,6 +2,7 @@ var m              = require('mithril');
 var Accordion = require('./Accordion.js');
 var ExampleList = module.exports;
 var Tutorial = require('../models/tutorials');
+var mainLayout = require('../layouts/main');
 var _ = require('underscore');
 
 ExampleList.controller = function () {
@@ -29,5 +30,6 @@ ExampleList.view = function (ctrl, options) {
 
 	// we need to do m.component here so that it's actually mounting the component
 	// rather than just using a view
-	return m.component(Accordion, options);
+	var view = Accordion.view(ctrl, options);
+	return mainLayout(view);
 }

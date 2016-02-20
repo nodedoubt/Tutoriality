@@ -1,7 +1,7 @@
 var m              = require('mithril');
-var Nav            = require('./Nav');
 var TutorialModel  = require('../models/TutorialModel')
 var CreateTutorial = module.exports;
+var mainLayout = require('../layouts/main.js');
 
 CreateTutorial.tutorial = { title: '', description: ''}
 CreateTutorial.tutorial.steps    = [{Title: '', Description:''}]
@@ -15,18 +15,15 @@ CreateTutorial.controller = function () {
     CreateTutorial.tutorial.steps.push({ Title: '', Description:''})
   }
 
-
-
 }
 
 CreateTutorial.view = function (ctrl, options) {
- return m('div', [
-      Nav.view(),
+    var view = m('div', [
       createTemplate(ctrl),
       makeSteps(ctrl),
       buttons(ctrl)
     ]);
-
+    return mainLayout(view);
 }
 
 

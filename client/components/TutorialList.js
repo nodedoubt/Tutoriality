@@ -1,8 +1,9 @@
 var m              = require('mithril');
-var Nav            = require('./Nav');
 var _              = require('underscore');
 var Accordian      = require('./Accordion.js');
 var List           = module.exports;
+var mainLayout = require('../layouts/main');
+
 
 
 List.controller = function () {
@@ -19,8 +20,7 @@ List.controller = function () {
 };
 
 List.view = function (ctrl, options) {
-  return m('div.listView', [
-    Nav.view(),
+  var view = m('div.listView', [
 
     m('div.page-header', [
       m('h1', 'Tutorial List')
@@ -40,6 +40,8 @@ List.view = function (ctrl, options) {
     ])
 
   ]);
+
+  return mainLayout(view);
 
 
   // options = {

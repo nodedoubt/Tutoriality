@@ -1,6 +1,6 @@
 var m = require('mithril');
-var Nav = require('./Nav');
 var Read = module.exports;
+var mainLayout = require('../layouts/main');
 
 Read.controller = function () {
   var ctrl = this;
@@ -8,11 +8,11 @@ Read.controller = function () {
   };
 
 Read.view = function (ctrl, options) {
-    return m('.read', [
-        Nav.view(),
+    var view =  m('.read', [
         readTitle(),
         readSubView()
     ]);
+    return mainLayout(view);
 };
 
 var readTitle = function() {

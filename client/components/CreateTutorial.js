@@ -18,7 +18,7 @@ CreateTutorial.controller = function () {
 
 CreateTutorial.view = function (ctrl, options) {
     var view = m('div', [
-      createTemplate(),
+      createTemplate(ctrl),
       makeSteps(ctrl),
       buttons(ctrl)
     ]);
@@ -40,7 +40,7 @@ var createTemplate = function(ctrl, options) {
                     type: 'text',
                     placeholder: 'Enter Title',
                     style: 'width: 55%;',
-                    onchange: function() { ctrl.tutorial.title = this.value }
+                    onchange: function(e) { e.preventDefault(); ctrl.tutorial.title = this.value }
                   })
                 ]),
                 m('form', 'Description: ', { type: 'text' }, [
@@ -49,7 +49,7 @@ var createTemplate = function(ctrl, options) {
                     type: 'text',
                     placeholder: 'Enter Description',
                     style: 'width: 55%;',
-                    onchange: function() { ctrl.tutorial.description = this.value }
+                    onchange: function(e) { e.preventDefault(); ctrl.tutorial.description = this.value }
                   })
                 ])
             ]),

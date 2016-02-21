@@ -104,15 +104,8 @@ var buttons = function(ctrl){
               }, 'Add Step'),
             m('button', {
               type: 'submit',
-              onclick: function(e) { e.preventDefault(); console.log('Commit Tutorial To Database'); console.log(ctrl.tutorial) }
+              onclick: function(e) { e.preventDefault(); Tutorial.create(ctrl.tutorial); console.log(ctrl.tutorial) }
             }, 'Save')
 
     ])
 }
-
-var updateStep = function() {
- //if step has been made,
- //so when someone adds a new step
-}
-
-//function blanks step model into steps array

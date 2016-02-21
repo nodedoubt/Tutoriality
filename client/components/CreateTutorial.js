@@ -1,20 +1,20 @@
 var m              = require('mithril');
-var TutorialModel  = require('../models/TutorialModel')
+var Tutorial       = require('../models/tutorials')
 var CreateTutorial = module.exports;
-var mainLayout = require('../layouts/main.js');
-var User = require('../models/users');
+var mainLayout     = require('../layouts/main.js');
+var User           = require('../models/users');
 
-CreateTutorial.tutorial = { title: '', description: ''}
-CreateTutorial.tutorial.steps    = [{Title: '', Description:''}]
 
 CreateTutorial.controller = function () {
-  var ctrl = this;
-  ctrl.counter = 1;
-  ctrl.addStep = function(){
-    CreateTutorial.tutorial.steps.push({ Title: '', Description:''})
-  }
+  var ctrl = this
+
+  ctrl.tutorial = Tutorial.tutorialVM()
   User.confirmLoggedIn();
+
+  ctrl.submit = function() {}
+
 }
+
 
 CreateTutorial.view = function (ctrl, options) {
     var view = m('div', [
@@ -27,6 +27,7 @@ CreateTutorial.view = function (ctrl, options) {
 
 
 var createTemplate = function(ctrl, options) {
+
   return m('.CreateTutorial', [
             m('h2', 'Create Tutorial'),
 
@@ -39,7 +40,7 @@ var createTemplate = function(ctrl, options) {
                     type: 'text',
                     placeholder: 'Enter Title',
                     style: 'width: 55%;',
-                    oninput: function() { CreateTutorial.tutorial.title = this.value }
+                    onchange: function(e) { e.preventDefault(); ctrl.tutorial.title = this.value }
                   })
                 ]),
                 m('form', 'Description: ', { type: 'text' }, [
@@ -48,7 +49,7 @@ var createTemplate = function(ctrl, options) {
                     type: 'text',
                     placeholder: 'Enter Description',
                     style: 'width: 55%;',
-                    oninput: function() { CreateTutorial.tutorial.description = this.value }
+                    onchange: function(e) { e.preventDefault(); ctrl.tutorial.description = this.value }
                   })
                 ])
             ]),
@@ -67,24 +68,26 @@ var createTemplate = function(ctrl, options) {
 var makeSteps = function(ctrl) {
   return m('.steps', { style: 'margin-left: 10px;'}, [
 
-  CreateTutorial.tutorial.steps.map(function(step){
+  ctrl.tutorial.steps.map(function(step, idx){
     return m('form', 'Description:', { type: 'text',  style: 'margin-right: 33%;' }, [
             m('br'),
             m('input', {
               type: 'text',
               placeholder: 'Give a short description of step',
               style: 'width: 54%',
-              oninput: function() { CreateTutorial.tutorial.steps[ctrl.counter-1].Title = this.value }
+              oninput: function() { ctrl.tutorial.steps[idx].title = this.value }
+               //on change
                }),
             m('br'),
             m('br'),
-            m('form', 'Step: ' + ctrl.counter, { type: 'text' }),
+            m('form', 'Step #' + (idx+1), { type: 'text' }),
             m('textarea.form-control', {
               rows:'3',
               type:'text',
               placeholder:'Step it out!',
               style: 'width:75%; height:175px ',
-              oninput: function() { CreateTutorial.tutorial.steps[ctrl.counter-1].Description = this.value }
+              oninput: function() { ctrl.tutorial.steps[idx].content = this.value }
+              // onchange
                }),
             m('br'),
            ])
@@ -92,20 +95,17 @@ var makeSteps = function(ctrl) {
        ])
 }
 
+
 var buttons = function(ctrl){
   return m('.buttons', [
             m('button', {
               type:'submit',
-              onclick:  function(e){ e.preventDefault(); ctrl.counter++; console.log(ctrl.counter); return ctrl.addStep();  }
+              onclick:  function(e){ e.preventDefault(); ctrl.tutorial.steps.push( Tutorial.stepVM() ) }
               }, 'Add Step'),
             m('button', {
               type: 'submit',
-              onclick: function(e) { e.preventDefault(); console.log('Commit Tutorial To Database'); console.log(CreateTutorial.tutorial) }
+              onclick: function(e) { e.preventDefault(); Tutorial.create(ctrl.tutorial); console.log(ctrl.tutorial) }
             }, 'Save')
 
     ])
 }
-
-
-
-//function blanks step model into steps array

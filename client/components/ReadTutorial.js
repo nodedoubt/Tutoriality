@@ -9,10 +9,14 @@ var Tutorial       = require('../models/tutorials');
 Read.controller = function () {
   var ctrl = this;
 
+  // id is passed in from TutorialList
+  // use this for fetchByID(ctrl.id)
+  ctrl.id = m.route.param('id');
+
   // use later on
   // User.confirmLoggedIn();
   // ctrl.fetch = Tutorial.fetchByID(id);
-  
+
   ctrl.tutorials = Tutorial.soFetch;
   ctrl.listSteps = Tutorial.map;
 }
@@ -52,7 +56,7 @@ Read.view = function (ctrl, options) {
                             m('p', list.Description)
                           ])
                         ])
-                      ]) 
+                      ])
                ])
             })
         ])
@@ -84,9 +88,8 @@ var editBtn = function(ctrl) {
                         m('button.btn.btn-default', { 'data-dismiss': 'modal', type: 'button' }, "Close"),
                         m('button.btn.btn-primary', { type: 'button' }, "Save Changes")
                     ])
-                ]) 
+                ])
             ])
          ])
     ])
 }
-

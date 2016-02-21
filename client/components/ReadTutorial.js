@@ -18,7 +18,7 @@ Read.controller = function () {
 }
 
 
-
+var id = 0;
 Read.view = function (ctrl, options) {
     var view =  m('.read', [
         m('.title-read', [
@@ -34,21 +34,25 @@ Read.view = function (ctrl, options) {
         ]),
         m('.content-steps', [
             ctrl.listSteps.map(function(list) {
+                // console.log('see me', list)
+                id++
+                console.log('seeing if ctrl works', ctrl)
+                // console.log(list.Description)
                  return m('.panel-group', { 'aria-multiselectable': 'true', id: 'accordion', role: 'tablist' }, [
                           m('.panel.panel-default', [
-                            m('.panel-heading', { id: 'heading', role: 'tab' }, [
+                            m('.panel-heading', { id: 'heading' + id, role: 'tab' }, [
                               m('h4.panel-title', [
-                                m('a', { 'aria-controls': 'collapse', 'aria-expanded': 'false', 'data-parent': '#accordion', 'data-toggle': 'collapse', href: '#collapse', role: 'button' }, [
+                                m('a', { 'aria-controls': 'collapse' + id, 'aria-expanded': 'false', 'data-parent': '#accordion', 'data-toggle': 'collapse', href: '#collapse' + id, role: 'button' }, [
                                   m('h3', list.Title)
                                ])
                              ])
                            ]),
-                        m('.panel-collapse.collapse', { 'aria-labelledby': 'heading', id: 'collapse', role: 'tabpanel' }, [
+                        m('.panel-collapse.collapse', { 'aria-labelledby': 'heading' + id, id: 'collapse' + id, role: 'tabpanel' }, [
                           m('.panel-body', [
                             m('p', list.Description)
                           ])
                         ])
-                      ]), 
+                      ]) 
                ])
             })
         ])

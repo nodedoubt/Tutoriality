@@ -11,7 +11,9 @@ CreateTutorial.controller = function () {
   ctrl.tutorial = Tutorial.tutorialVM()
   User.confirmLoggedIn();
 
-  ctrl.submit = function() {}
+  ctrl.removeStep = function (idx) {
+    ctrl.tutorial.steps.splice(idx, 1)
+  }
 
 }
 
@@ -20,11 +22,16 @@ CreateTutorial.view = function (ctrl, options) {
     var view = m('div', [
       createTemplate(ctrl),
       makeSteps(ctrl),
-      buttons(ctrl)
+      buttons(ctrl),
     ]);
     return mainLayout(view);
 }
 
+var removeStep = function(ctrl, idx) {
+  if (ctrl.tutorial.steps.length >= 2) {
+    return m('button', { onclick: ctrl.tutorial.removeStep(idx) }, 'Remove Step')
+  }
+}
 
 var createTemplate = function(ctrl, options) {
 
@@ -96,16 +103,18 @@ var makeSteps = function(ctrl) {
 }
 
 
-var buttons = function(ctrl){
-  return m('.buttons', [
-            m('button', {
-              type:'submit',
-              onclick:  function(e){ e.preventDefault(); ctrl.tutorial.steps.push( Tutorial.stepVM() ) }
-              }, 'Add Step'),
-            m('button', {
-              type: 'submit',
-              onclick: function(e) { e.preventDefault(); Tutorial.create(ctrl.tutorial); console.log(ctrl.tutorial) }
-            }, 'Save')
 
+var buttons = function(ctrl) {
+  return m('div', [
+      m(".btn-group[aria-label='...'][role='group']", [
+        m("button.btn.btn-default[type='button']", {
+          onclick:  function(e){ e.preventDefault(); ctrl.tutorial.steps.push( Tutorial.stepVM() ) }
+        }, "Add Step"),
+        m("button.btn.btn-default[type='button']",  "Delete Step"),
+        m("button.btn.btn-default[type='button']", {
+          onclick: function(e) { e.preventDefault(); Tutorial.create(ctrl.tutorial); console.log(ctrl.tutorial) }
+        }, "Save"),
+      ])
     ])
 }
+

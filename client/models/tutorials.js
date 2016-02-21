@@ -102,17 +102,6 @@ Tutorial.soFetch = exampleData.filter(function(list) {
   });
 console.log('fetch', Tutorial.soFetch[0].steps)
 
-// Tutorial.readTuts = Tutorial.soFetch.map(function(tutorial) {
-//     return {
-//       id: tutorial.id,
-//       title: tutorial.title,
-//       description: tutorial.description,
-//       steps: tutorial.steps
-//     };
-//   });
-
-// console.log('listme',Tutorial.readTuts)
-
 Tutorial.map = _.map(exampleData[0].steps, function(list) {
     console.log('map', list)
     return list

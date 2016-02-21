@@ -57,11 +57,11 @@ var exampleData =[
         },
          {
           Title: 'extra',
-          Description: 'Get dog shampoo, a basin or tub to wash the dog in and warm water'
+          Description: 'extra extra'
         },
         {
           Title: 'extra 2',
-          Description: 'Use hotdogs or your speed to capture the dog and put it in the basin of water'
+          Description: 'Duplicate extra'
         }
       ]
     },
@@ -107,7 +107,5 @@ Tutorial.map = _.map(exampleData[0].steps, function(list) {
     return list
 })
 
-console.log('log tm',Tutorial.map)
 
-// console.log('final step plz', Tutorial.listSteps)
 

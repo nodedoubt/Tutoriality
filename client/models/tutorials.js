@@ -94,7 +94,6 @@ var exampleData =[
         }
 ];
 
-
 Tutorial.soFetch = exampleData.filter(function(list) {
     if(list['id'] === 0) {
         return true;

@@ -1,21 +1,34 @@
 var m              = require('mithril');
 var _              = require('underscore');
 var Accordian      = require('./Accordion.js');
+var Tutorial       = require('../models/tutorials.js')
 var List           = module.exports;
-var mainLayout = require('../layouts/main');
-
+var mainLayout     = require('../layouts/main');
+var Read           = require('./ReadTutorial.js');
 
 
 List.controller = function () {
   var ctrl = this;
   ctrl.tutorials = [];
+  // Tutorial.fetchAll().then(function(tutorials) {
+  //   ctrl.tutorials = _.map(tutorials, function(tutorial) {
+  //       return {
+  //         id: tutorial.id,
+  //         title: tutorial.title,
+  //         content: m('.tutorial-content', tutorial.description)
+  //       };
+  //     });
+  // });
+
   ctrl.tutorials = _.map(List.tutorials, function(tutorial) {
-    return {
-      id: tutorial.id,
-      title: tutorial.title,
-      content: m('.tutorial-content', tutorial.description)
-    };
-  });
+      return {
+        id: tutorial.id,
+        title: tutorial.title,
+        content: m('.tutorial-content', tutorial.description)
+      };
+    });
+
+
 };
 
 List.view = function (ctrl, options) {
@@ -30,7 +43,8 @@ List.view = function (ctrl, options) {
         return m('div.panel.panel-default', [
           m('div.panel-heading', [
             m('h3.panel-title.list-link',  { "data-id": tutorial.id, onclick: function(e){
-              console.log('Call Tutorial.fetchByID() with this id: ', e.target.getAttribute('data-id'));
+              var id = e.target.getAttribute('data-id');
+              m.route('/read/' + id)
             }.bind(ctrl)}, tutorial.title)
           ])
         ],
@@ -41,18 +55,6 @@ List.view = function (ctrl, options) {
   ]);
 
   return mainLayout(view);
-
-
-  // options = {
-  //   sections: ctrl.tutorials,
-  //   id: ''
-  // };
-  // return m('div', [
-  //   Nav.view(),
-  //   m('h2', 'Tutorial List'),
-  //   m.component(Accordian, options)
-  // ]);
-
 };
 
 

@@ -2,6 +2,7 @@ var m              = require('mithril');
 var Accordion = require('./Accordion.js');
 var ExampleList = module.exports;
 var Tutorial = require('../models/tutorials');
+var Notification = require('../models/notifications');
 var mainLayout = require('../layouts/main');
 var _ = require('underscore');
 
@@ -30,6 +31,11 @@ ExampleList.view = function (ctrl, options) {
 
 	// we need to do m.component here so that it's actually mounting the component
 	// rather than just using a view
-	var view = Accordion.view(ctrl, options);
+	var view = m('div', [
+		m('button.btn', {onclick : function(){
+			Notification.set("warning", "I am a notification");
+		}}, "Notify"),
+		Accordion.view(ctrl, options),
+	])
 	return mainLayout(view);
 }

@@ -17,7 +17,6 @@ CreateTutorial.controller = function () {
   }
 }
 
-
 CreateTutorial.view = function (ctrl, options) {
     var view = m('div', [
       createTemplate(ctrl),

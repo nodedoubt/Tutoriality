@@ -1,37 +1,53 @@
 # Tutoriality
-Tutorial Creator and read
+
+> Tutoriality aims to make online tutorials more relevant, reliable, and actionable
+
+## Team
+
+  - __Product Owner__: Clay Branch
+  - __Scrum Master__: Grant Redfearn
+  - __Development Team Members__: Daniel Dinh, Veronica Hernandez
 
 
-## Heading ##
-  > Tutoriality
+## Table of Contents
 
-## Sub-Heading ##
-  > Tutoriality aims to make online tutorials more relevent, reliable,  and actionable.
+1. [Usage](#Usage)
+1. [Requirements](#requirements)
+1. [Development](#development)
+    1. [Installing Dependencies](#installing-dependencies)
+    1. [Tasks](#tasks)
+1. [Team](#team)
+1. [Contributing](#contributing)
 
-## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+## Usage
+
+> To Run Tests
+```sh
+npm test
+```
 
 
-## Problem ##
-  > Tutorials are static, redundent, out of date, and hard to follow.
+## Requirements
 
-## Solution ##
-  > By divding tutorials into concrete actionable steps that can be completed individually, users get a consistent learning experience regardless of what they are trying to learn.
+- Node 4.2.6
+- Mongodb 3.2
 
-## Quote from You ##
-  > Tutoriality is the killer app you are looking for to get the most out of your online learning experience.
 
-## How to Get Started ##
-  > Pick a tutorial and get to learning! Or create your own tutorial and share your knowledge with the world!
+## Development
 
-## Customer Quote ##
-  > "I've spent countless hours working through out-dated, hazey, indirect tutorials, and I'm ready for some consistency. Tutoriality solves this problem by creating an environment that is consistent and accessable."
+### Installing Dependencies
 
-## Closing and Call to Action ##
-  > Easy as going to tutoriality.com, choose your topic of interest, and begin learning right away!
+From within the root directory:
 
-  Our team:
-Clay Branch - Product Owner
-Daniel Dinh - Development Team
-Grant Redfearn - Scrum Master
-Veronica Hernandez - Development Team
+```sh
+npm install
+```
+
+### Roadmap
+
+View the project roadmap [here](https://github.com/AngryUnicorns/Tutoriality/issues)
+
+
+## Contributing
+
+See [CONTRIBUTING.md](https://github.com/AngryUnicorns/Tutoriality/blob/master/CONTRIBUTING.md) for contribution guidelines.

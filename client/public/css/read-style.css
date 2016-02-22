@@ -11,13 +11,16 @@ legend > h2 {
 	color: 1C5F75;
 	text-align:center;
 	font-size:32px;
-	font-weight: bold;
+	font-weight: 200;
 	margin: 0 auto;
+	color: #317eac;
 }
 
 legend > p {
-    text-align: center;
+  text-align: center;
 	margin: 0 auto;
+	font-weight: 200;
+	padding-bottom: 20;
 }
 
 div.btn {
@@ -32,14 +35,15 @@ div.btn {
   width: 90%;
   margin: 0 auto;
   /*height: 500px;*/
-  background-color: #f2f2f2;
+  background-color: transparent;
   /*border: 1px solid #eee;*/
 }
 
 h3 {
 	font-size: 16px;
+	text-decoration: underline;
 }
 
 .panel-body {
-	text-align: center;
+	text-align: left;
 }

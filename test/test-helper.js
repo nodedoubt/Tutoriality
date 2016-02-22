@@ -29,6 +29,9 @@ global.expect = chai.expect
 global.TestHelper = { 
   emptyDatabase : function() {
     return db.deleteEverything();
+  },
+  wrapID : function(id) {
+    return db.getMongoID(id);
   }
 }
 

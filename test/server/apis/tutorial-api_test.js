@@ -3,6 +3,7 @@ require(TEST_HELPER) // <--- This must be at the top of every test file.
 var request = require('supertest')
 var Tutorial = require(__server + '/models/tutorial.js');
 
+
 describe("The Tutorial API", function() {
   var app = null;
   beforeEach(function(done){
@@ -31,21 +32,23 @@ describe("The Tutorial API", function() {
       })
   })
   it_("returns a single tutorial on /api/tutorials/:id", function * () {
-    yield Tutorial.insert({title : "A tutorial", _id : '1000'});
+    var id = "523209c4561c640000000001";
+    yield Tutorial.insert({title : "A tutorial", _id : TestHelper.wrapID(id)});
     yield request(app)
-      .get('/api/tutorials/1000')
+      .get('/api/tutorials/523209c4561c640000000001')
       .expect(200)
       .expect(function(response) {
         expect(response.body).to.include({title : "A tutorial"});
       })
   })
   it_("updates a single tutorial on put /api/tutorials/:id", function * () {
+    var id = "523209c4561c640000000001";
     var newContent = {
       title : "Other",
     };
-    yield Tutorial.insert({oldContent : "foo", title : "A tutorial", _id : '1000'});
+    yield Tutorial.insert({oldContent : "foo", title : "A tutorial", _id : TestHelper.wrapID(id)});
     yield request(app)
-      .put('/api/tutorials/1000')
+      .put('/api/tutorials/' + id)
       .send(newContent)
       .expect(200)
       .expect(function(response, error) {

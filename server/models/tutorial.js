@@ -17,7 +17,7 @@ Tutorial.find = function(query) {
 }
 
 Tutorial.findByID = function(id) {
-	return collection().findOne({_id : id});
+	return collection().findOne({_id : db.getMongoID(id)});
 }
 
 Tutorial.update = function(query, updateFields) {
@@ -25,5 +25,5 @@ Tutorial.update = function(query, updateFields) {
 }
 
 Tutorial.updateByID = function(id, updateFields) {
-	return Tutorial.update({_id : id}, updateFields);
+	return Tutorial.update({_id : db.getMongoID(id)}, updateFields);
 }

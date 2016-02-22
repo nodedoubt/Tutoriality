@@ -24,6 +24,10 @@ db.loadFixtures = function() {
 	});
 }
 
+db.getMongoID = function(idString) {
+	return pmongo.ObjectId(idString);
+}
+
 db.loadFixtures();
 
 module.exports = db;

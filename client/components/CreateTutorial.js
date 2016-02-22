@@ -8,26 +8,8 @@ var User           = require('../models/users');
 var CreateTutorial = module.exports;
 //assume options object tutorial_id
 // pass in options
-CreateTutorial.controller = function () {
+CreateTutorial.controller = function (options) {
   var ctrl = this
-
-  ctrl.tutorial_id = false;
-  ctrl.idCheck = false;
-
-
-  ctrl.checkForTutorialId = function(){
-    if(!ctrl.tutorial_id) {
-      ctrl.tutorial = Tutorial.tutorialVM()
-    }
-    else {
-      Tutorial.fetchById(tutorial_id)
-      .then(function(tutorial){
-        ctrl.idCheck = true;
-        ctrl.tutorial = tutorial;
-      })
-    }
-  }
-
   ctrl.save = function (tutorial) {
     if(ctrl.idCheck) {
       Tutorial.update(tutorial)
@@ -37,14 +19,26 @@ CreateTutorial.controller = function () {
     }
   }
 
+  ctrl.populate = function(options) {
+    ctrl.tutorial = null;
+    if(options.tutorial_id === undefined) {
+      ctrl.tutorial = Tutorial.tutorialVM()
+    }
+    else {
+      Tutorial.fetchById(options.tutorial_id)
+      .then(function(tutorial){
+        ctrl.tutorial = tutorial;
+      })
+    }
+  }
+
 
   ctrl.removeStep = function (idx) {
     ctrl.tutorial.steps.splice(idx, 1)
   }
 
   User.confirmLoggedIn();
-  ctrl.checkForTutorialId();
-
+  ctrl.populate();
 }
 
 CreateTutorial.view = function (ctrl, options) {

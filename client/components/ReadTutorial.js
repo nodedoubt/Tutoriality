@@ -8,31 +8,49 @@ var Tutorial       = require('../models/tutorials');
 
 Read.controller = function () {
   var ctrl = this;
+  console.log('error',ctrl.error)
 
-  // id is passed in from TutorialList
-  // use this for fetchByID(ctrl.id)
   ctrl.id = m.route.param('id');
-
+  console.log('id',ctrl.id)
   // User.confirmLoggedIn();
 
-  // ctrl.tutorials = Tutorial.fetchByID(ctrl.id);
-  ctrl.tutorials = Tutorial.soFetch[ctrl.id];
+  ctrl.tutorials = null;
 
-  ctrl.listSteps = _.map(Tutorial.soFetch[ctrl.id].steps, function(list) {
-      return list;
+ // Tutorial.fetchByID(ctrl.id).then(function(tutorial) {
+ //    console.log('fetch by id', tutorial)
+ //    return tutorial
+ // })
+ 
+   Tutorial.fetchAll().then(function(tutorials) {
+    ctrl.tutorials = _.filter(tutorials, function(tutorial) {
+      if (tutorial._id === ctrl.id) {
+        return {
+          id: tutorial._id,
+          title: tutorial.title,
+          content: m('.tutorial-conent', tutorial.description)
+        }
+      }
+    })
+  });
+console.log('saasdasda', ctrl.tutorials)
+  
+  ctrl.listSteps = _.map(ctrl.tutorials, function(list) {
+    console.log('inside list steps ctrl', list)
+      return list.steps;
   })
-  console.log('map steps', ctrl.listSteps)
 };
 
 Read.view = function (ctrl, options) {
+  console.log('read view', ctrl.tutorials)
   var id = 0;
-  console.log('error?', options)
     var view =  m('.read', [
-        m('.title-read', [
-            m('legend', [
-                m('h2', ctrl.tutorials.title),
+      ctrl.tutorials.map(function(list) {
+        // m('.title-read', [
+        console.log('inside',list)
+            return m('legend', [
+                m('h2', list.title),
                 m('br'),
-                m('p', ctrl.tutorials.description),
+                m('p', list.description),
                 m('.auth-edit', [
                   //edit  to creator of tutorial 
                   !User.isLoggedIn() ? [
@@ -40,16 +58,18 @@ Read.view = function (ctrl, options) {
                   ] : null,
                ])
            ])
-        ]),
+          // ])
+        }),
         m('.content-steps', [
             ctrl.listSteps.map(function(list) {
+              console.log('content steps', list)
                 id++
                  return m('.panel-group', { 'aria-multiselectable': 'true', id: 'accordion', role: 'tablist' }, [
                           m('.panel.panel-default', [
                             m('.panel-heading', { id: 'heading' + id, role: 'tab' }, [
                               m('h4.panel-title', [
                                 m('a', { 'aria-controls': 'collapse' + id, 'aria-expanded': 'false', 'data-parent': '#accordion', 'data-toggle': 'collapse', href: '#collapse' + id, role: 'button' }, [
-                                  m('h3', list.Title)
+                                  m('h3', list.title)
                                ])
                              ])
                            ]),

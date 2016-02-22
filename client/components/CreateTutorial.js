@@ -1,22 +1,49 @@
 var m              = require('mithril');
 var marked         = require('marked');
 
-var Tutorial       = require('../models/tutorials')
 var mainLayout     = require('../layouts/main.js');
+var Tutorial       = require('../models/tutorials')
 var User           = require('../models/users');
 
 var CreateTutorial = module.exports;
-
-
+//assume options object tutorial_id
+// pass in options
 CreateTutorial.controller = function () {
   var ctrl = this
 
-  ctrl.tutorial = Tutorial.tutorialVM()
-  User.confirmLoggedIn();
+  ctrl.tutorial_id = false;
+
+
+  ctrl.checkForTutorialId = function(){
+    if(!ctrl.tutorial_id) {
+      ctrl.tutorial = Tutorial.tutorialVM()
+    }
+    else {
+      Tutorial.fetchById(tutorial_id)
+      .then(function(tutorial){
+        ctrl.idCheck = true;
+        ctrl.tutorial = tutorial;
+      })
+    }
+  }
+
+  ctrl.save = function (tutorial) {
+    if(ctrl.idCheck) {
+      Tutorial.update(tutorial)
+    }
+    else {
+      Tutorial.create(tutorial)
+    }
+  }
+
 
   ctrl.removeStep = function (idx) {
     ctrl.tutorial.steps.splice(idx, 1)
   }
+
+  User.confirmLoggedIn();
+  ctrl.checkForTutorialId();
+
 }
 
 CreateTutorial.view = function (ctrl, options) {
@@ -26,13 +53,9 @@ CreateTutorial.view = function (ctrl, options) {
       buttons(ctrl),
     ]);
     return mainLayout(view);
+
 }
 
-var removeStep = function(ctrl, idx) {
-  if (ctrl.tutorial.steps.length >= 2) {
-    return m('button', { onclick: ctrl.tutorial.removeStep(idx) }, 'Remove Step')
-  }
-}
 
 var createTemplate = function(ctrl, options) {
 
@@ -106,17 +129,23 @@ var buttons = function(ctrl) {
   return m('div', { style:'margin-left:30%;'}, [
       m(".btn-group[aria-label='...'][role='group']", [
         m("button.btn.btn-primary.btn-lrg[type='button']", {
-          onclick:  function(e) { e.preventDefault(); ctrl.tutorial.steps.push( Tutorial.stepVM() ) }
+          onclick:  function(e) { e.preventDefault(); ctrl.tutorial.steps.push( Tutorial.stepVM() );}
         }, "Add Step"),
         m("button.btn.btn.btn-primary.btn-lrg[type='button']", {
           onclick: function(e) { e.preventDefault(); ctrl.removeStep(ctrl, this.idx) }
         }, "Delete Step"),
         m("button.btn.btn.btn-primary.btn-lrg[type='button']", {
-          onclick: function(e) { e.preventDefault(); Tutorial.create(ctrl.tutorial); console.log(ctrl.tutorial); m.route('/'); }
+          onclick: function(e) { e.preventDefault(); ctrl.save(ctrl.tutorial); m.route('/'); }
         }, "Save"),
       ]),
       m('br'),
       m('br'),
     ])
+}
+
+var removeStep = function(ctrl, idx) {
+  if (ctrl.tutorial.steps.length >= 2) {
+    return m('button', { onclick: ctrl.tutorial.removeStep(idx) }, 'Remove Step')
+  }
 }
 

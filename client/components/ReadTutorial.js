@@ -24,16 +24,21 @@ Read.controller = function () {
   console.log('map steps', ctrl.listSteps)
 };
 
-
-var id = 0;
 Read.view = function (ctrl, options) {
+  var id = 0;
+  console.log('error?', options)
     var view =  m('.read', [
         m('.title-read', [
             m('legend', [
                 m('h2', ctrl.tutorials.title),
                 m('br'),
                 m('p', ctrl.tutorials.description),
-                m('div', editBtn())
+                m('.auth-edit', [
+                  //edit  to creator of tutorial 
+                  !User.isLoggedIn() ? [
+                    m('div', editBtn(options))
+                  ] : null,
+               ])
            ])
         ]),
         m('.content-steps', [
@@ -61,8 +66,9 @@ Read.view = function (ctrl, options) {
     return mainLayout(view);
 };
 
-var editBtn = function(ctrl) {
-  console.log('cccc',Tutorial.soFetch[m.route.param('id')])
+var editBtn = function(options) {
+  // console.log('cccc',Tutorial.soFetch[m.route.param('id')])
+  // console.log('ctrl in edit', ctrl)
     return m('div.btn', [
         m('button.btn.btn-primary.btn-md', { 'data-target': '#myModal', 'data-toggle': 'modal', type: 'button' }, [
             m('div.edit', 'Edit')
@@ -76,9 +82,9 @@ var editBtn = function(ctrl) {
                         m('h4.modal-title', { id: 'myModalLabel' }, "Edit Tutorial")
                     ]),
                     m('.modal-body', [
-                        // m('div', editForm())
+                        
                         // console.log(document.getElementsByClassName("content-read"))
-                        m('textarea', { rows:'3', type:'text', style: 'width:75%; height:175px', value: _.values( Tutorial.soFetch[m.route.param('id')] ) }) //trying to create edit
+                        m('textarea', { rows:'3', type:'text', style: 'width:75%; height:175px', value: document.getElementsByClassName(".read").value }) //trying to create edit
                     ]),
                     m('.modal-footer', [
                         m('button.btn.btn-default', { 'data-dismiss': 'modal', type: 'button' }, "Close"),

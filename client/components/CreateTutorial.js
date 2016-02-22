@@ -12,6 +12,7 @@ CreateTutorial.controller = function () {
   var ctrl = this
 
   ctrl.tutorial_id = false;
+  ctrl.idCheck = false;
 
 
   ctrl.checkForTutorialId = function(){

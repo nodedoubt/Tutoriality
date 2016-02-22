@@ -8,54 +8,50 @@ var Tutorial       = require('../models/tutorials');
 
 Read.controller = function () {
   var ctrl = this;
+  console.log('error',ctrl.error)
 
-  // id is passed in from TutorialList
-  // use this for fetchByID(ctrl.id)
   ctrl.id = m.route.param('id');
+  console.log('id',ctrl.id)
+  User.confirmLoggedIn();
 
-  // User.confirmLoggedIn();
+  ctrl.tutorial = null;;
+  ctrl.listSteps = null
 
-  // ctrl.tutorials = Tutorial.fetchByID(ctrl.id);
-  ctrl.tutorials = Tutorial.soFetch[ctrl.id];
-
-  ctrl.listSteps = _.map(Tutorial.soFetch[ctrl.id].steps, function(list) {
-      return list;
+  Tutorial.fetchByID(ctrl.id).then(function(tutorial) {
+     ctrl.tutorial = tutorial
   })
-  console.log('map steps', ctrl.listSteps)
 };
 
 Read.view = function (ctrl, options) {
-  var id = 0;
-  console.log('error?', options)
+    var id = 0;
     var view =  m('.read', [
-        m('.title-read', [
-            m('legend', [
-                m('h2', ctrl.tutorials.title),
-                m('br'),
-                m('p', ctrl.tutorials.description),
-                m('.auth-edit', [
+                  m('legend', [
+                  m('h2', ctrl.tutorial.title),
+                  m('br'),
+                  m('p', ctrl.tutorial.description),
+                  m('.auth-edit', [
                   //edit  to creator of tutorial 
-                  !User.isLoggedIn() ? [
+                  User.isLoggedIn() ? [
                     m('div', editBtn(options))
                   ] : null,
                ])
-           ])
-        ]),
+             ]),
         m('.content-steps', [
-            ctrl.listSteps.map(function(list) {
+            ctrl.tutorial.steps.map(function(list) {
+              console.log('content steps', list)
                 id++
                  return m('.panel-group', { 'aria-multiselectable': 'true', id: 'accordion', role: 'tablist' }, [
                           m('.panel.panel-default', [
                             m('.panel-heading', { id: 'heading' + id, role: 'tab' }, [
                               m('h4.panel-title', [
                                 m('a', { 'aria-controls': 'collapse' + id, 'aria-expanded': 'false', 'data-parent': '#accordion', 'data-toggle': 'collapse', href: '#collapse' + id, role: 'button' }, [
-                                  m('h3', list.Title)
+                                  m('h3', list.title)
                                ])
                              ])
                            ]),
                         m('.panel-collapse.collapse', { 'aria-labelledby': 'heading' + id, id: 'collapse' + id, role: 'tabpanel' }, [
                           m('.panel-body', [
-                            m('p', list.Description)
+                            m('p', list.content)
                           ])
                         ])
                       ])
@@ -67,8 +63,6 @@ Read.view = function (ctrl, options) {
 };
 
 var editBtn = function(options) {
-  // console.log('cccc',Tutorial.soFetch[m.route.param('id')])
-  // console.log('ctrl in edit', ctrl)
     return m('div.btn', [
         m('button.btn.btn-primary.btn-md', { 'data-target': '#myModal', 'data-toggle': 'modal', type: 'button' }, [
             m('div.edit', 'Edit')

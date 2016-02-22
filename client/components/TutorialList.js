@@ -13,7 +13,7 @@ List.controller = function () {
   Tutorial.fetchAll().then(function(tutorials) {
     ctrl.tutorials = _.map(tutorials, function(tutorial) {
         return {
-          id: tutorial.id,
+          id: tutorial._id,
           title: tutorial.title,
           content: m('.tutorial-content', tutorial.description)
         };

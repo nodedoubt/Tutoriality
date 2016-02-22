@@ -1,6 +1,7 @@
 var m = require('mithril');
 var _ = require('underscore');
 
+var User = require('./users');
 var Tutorial = module.exports;
 
 Tutorial.fetchAll = function() {
@@ -23,7 +24,8 @@ Tutorial.tutorialVM = function () {
   return {
     title: '',
     description: '',
-    steps: [ Tutorial.stepVM() ]
+    steps: [ Tutorial.stepVM() ],
+    created_by : User.getID(),
   }
 }
 

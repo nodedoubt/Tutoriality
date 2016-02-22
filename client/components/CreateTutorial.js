@@ -1,20 +1,21 @@
+//node dependencies
 var m              = require('mithril');
 var marked         = require('marked');
-
+//file dependencies
 var mainLayout     = require('../layouts/main.js');
 var Tutorial       = require('../models/tutorials')
 var User           = require('../models/users');
 
 var CreateTutorial = module.exports;
-//assume options object tutorial_id
-// pass in options
+
+
 CreateTutorial.controller = function () {
   var ctrl = this;
-
+//passes in the 'id' parameter into the controller
   ctrl.tutorialID = function() {
     return m.route.param('id');
   };
-
+//This decides whether or not to use a blank template, or import another tutorial for an edit
   ctrl.populate = function() {
     var tutorialID = ctrl.tutorialID();
     ctrl.tutorial = null;
@@ -28,7 +29,7 @@ CreateTutorial.controller = function () {
       ctrl.tutorial = Tutorial.tutorialVM()
     }
   }
-
+//Has two routes: Either creates a new tutorial or updates a tutorial
   ctrl.save = function (tutorial) {
     var tutorialID = ctrl.tutorialID();
     if(tutorialID) {
@@ -41,9 +42,9 @@ CreateTutorial.controller = function () {
     }
   }
 
-
+//This removes the first step.
   ctrl.removeStep = function (idx) {
-    ctrl.tutorial.steps.splice(idx, 1)
+    ctrl.tutorial.steps.splice(0, idx)
   }
 
   User.confirmLoggedIn();

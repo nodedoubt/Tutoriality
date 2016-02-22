@@ -28,8 +28,21 @@ User.signOut = function() {
 	}
 }
 
+User.isUserMatch = function(id) {
+	var userID = User.getID();
+	return !!userID && !!id && id === userID;
+}
+
 User.confirmLoggedIn = function() {
 	if(!User.isLoggedIn()) {
 		m.route('/sign-in');
 	}
+}
+
+User.getInfo = function() {
+	return OAuthUser.getIdentity();
+}
+
+User.getID = function() {
+	return User.getInfo().token;
 }

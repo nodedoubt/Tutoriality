@@ -17,6 +17,10 @@ Read.controller = function () {
 
   ctrl.tutorial = null;;
   ctrl.listSteps = null
+  // ctrl.userCanEdit = function() {
+  //   return ctrl.tutorial && ctrl.tutorial.created_by &&
+  // }
+
 
   Tutorial.fetchByID(ctrl.id).then(function(tutorial) {
      ctrl.tutorial = tutorial
@@ -32,7 +36,7 @@ Read.view = function (ctrl, options) {
                   m('p', ctrl.tutorial.description),
                   m('.auth-edit', [
                   //edit  to creator of tutorial
-                  User.isLoggedIn() ? [
+                  User.isUserMatch(ctrl.tutorial.created_by) ? [
                     m('div', editBtn(options, ctrl.tutorial))
                   ] : null,
                ])

@@ -1,9 +1,11 @@
 var m              = require('mithril');
+var marked         = require('marked');
+
 var Tutorial       = require('../models/tutorials')
-var CreateTutorial = module.exports;
 var mainLayout     = require('../layouts/main.js');
 var User           = require('../models/users');
-var marked         = require('marked');
+
+var CreateTutorial = module.exports;
 
 
 CreateTutorial.controller = function () {
@@ -102,15 +104,18 @@ var makeSteps = function(ctrl) {
 
 
 var buttons = function(ctrl) {
-  return m('div', { style:'margin-left:30%'}, [
+  return m('div', { style:'margin-left:30%;'}, [
       m(".btn-group[aria-label='...'][role='group']", [
         m("button.btn.btn-default[type='button']", {
+          style: 'background:#317eac; color:white',
           onclick:  function(e) { e.preventDefault(); ctrl.tutorial.steps.push( Tutorial.stepVM() ) }
         }, "Add Step"),
         m("button.btn.btn-default[type='button']", {
+          style: 'background:#317eac; color:white',
           onclick: function(e) { e.preventDefault(); ctrl.removeStep(ctrl, this.idx) }
         }, "Delete Step"),
         m("button.btn.btn-default[type='button']", {
+          style: 'background:#317eac; color:white',
           onclick: function(e) { e.preventDefault(); Tutorial.create(ctrl.tutorial); console.log(ctrl.tutorial); m.route('/'); }
         }, "Save"),
       ])

@@ -10,24 +10,24 @@ var Read           = require('./ReadTutorial.js');
 List.controller = function () {
   var ctrl = this;
   ctrl.tutorials = [];
-  // Tutorial.fetchAll().then(function(tutorials) {
-  //   ctrl.tutorials = _.map(tutorials, function(tutorial) {
-  //       return {
-  //         id: tutorial.id,
-  //         title: tutorial.title,
-  //         content: m('.tutorial-content', tutorial.description)
-  //       };
-  //     });
-  // });
+  Tutorial.fetchAll().then(function(tutorials) {
+    ctrl.tutorials = _.map(tutorials, function(tutorial) {
+        return {
+          id: tutorial.id,
+          title: tutorial.title,
+          content: m('.tutorial-content', tutorial.description)
+        };
+      });
+  });
 
-  ctrl.tutorials = _.map(List.tutorials, function(tutorial) {
-      return {
-        id: tutorial.id,
-        title: tutorial.title,
-        content: m('.tutorial-content', tutorial.description)
-      };
-    });
-
+  // ctrl.tutorials = _.map(List.tutorials, function(tutorial) {
+  //     return {
+  //       id: tutorial.id,
+  //       title: tutorial.title,
+  //       content: m('.tutorial-content', tutorial.description)
+  //     };
+  //   });
+  //
 
 };
 

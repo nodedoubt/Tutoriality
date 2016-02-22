@@ -15,6 +15,10 @@ Tutorial.create = function(tutorial) {
 	return m.request({method : 'POST', url : '/api/tutorials', data : tutorial});
 }
 
+Tutorial.updateByID = function(id, tutorial) {
+  return m.request({method : 'PUT', url : '/api/tutorials/' + id, data : tutorial});
+}
+
 Tutorial.tutorialVM = function () {
   return {
     title: '',

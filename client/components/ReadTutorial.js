@@ -4,6 +4,7 @@ var mainLayout     = require('../layouts/main');
 var User           = require('../models/users');
 var _              = require('underscore');
 var Tutorial       = require('../models/tutorials');
+var MarkDownText = require('../components/MarkDownText');
 
 
 Read.controller = function () {
@@ -30,9 +31,9 @@ Read.view = function (ctrl, options) {
                   m('br'),
                   m('p', ctrl.tutorial.description),
                   m('.auth-edit', [
-                  //edit  to creator of tutorial 
+                  //edit  to creator of tutorial
                   User.isLoggedIn() ? [
-                    m('div', editBtn(options))
+                    m('div', editBtn(options, ctrl.tutorial))
                   ] : null,
                ])
              ]),
@@ -51,7 +52,7 @@ Read.view = function (ctrl, options) {
                            ]),
                         m('.panel-collapse.collapse', { 'aria-labelledby': 'heading' + id, id: 'collapse' + id, role: 'tabpanel' }, [
                           m('.panel-body', [
-                            m('p', list.content)
+                            m('p', m.component(MarkDownText, list.content))
                           ])
                         ])
                       ])
@@ -62,30 +63,33 @@ Read.view = function (ctrl, options) {
     return mainLayout(view);
 };
 
-var editBtn = function(options) {
-    return m('div.btn', [
-        m('button.btn.btn-primary.btn-md', { 'data-target': '#myModal', 'data-toggle': 'modal', type: 'button' }, [
-            m('div.edit', 'Edit')
-         ]),
-        m('.modal.fade', { 'aria-labelledby': 'myModalLabel', id: 'myModal', role: 'dialog', tabcounter: '-1' },  [
-            m('.modal-dialog', { role: 'document' }, [
-                m('.modal-content', [
-                    m('.modal-header', [
-                        m('button.close', { 'aria-label': 'Close', 'data-dismiss': 'modal', type: 'button' }, [
-                            m('span', { 'aria-hidden': true }, 'x')]),
-                        m('h4.modal-title', { id: 'myModalLabel' }, "Edit Tutorial")
-                    ]),
-                    m('.modal-body', [
-                        
-                        // console.log(document.getElementsByClassName("content-read"))
-                        m('textarea', { rows:'3', type:'text', style: 'width:75%; height:175px', value: document.getElementsByClassName(".read").value }) //trying to create edit
-                    ]),
-                    m('.modal-footer', [
-                        m('button.btn.btn-default', { 'data-dismiss': 'modal', type: 'button' }, "Close"),
-                        m('button.btn.btn-primary', { type: 'button' }, "Save Changes")
-                    ])
-                ])
-            ])
-         ])
-    ])
+var editBtn = function(options, tutorial) {
+    return m('button.btn', {onclick : function(){
+      m.route('/edit/' + tutorial._id);
+    }}, "Edit")
+    // return m('div.btn', [
+    //     m('button.btn.btn-primary.btn-md', { 'data-target': '#myModal', 'data-toggle': 'modal', type: 'button' }, [
+    //         m('div.edit', 'Edit')
+    //      ]),
+    //     m('.modal.fade', { 'aria-labelledby': 'myModalLabel', id: 'myModal', role: 'dialog', tabcounter: '-1' },  [
+    //         m('.modal-dialog', { role: 'document' }, [
+    //             m('.modal-content', [
+    //                 m('.modal-header', [
+    //                     m('button.close', { 'aria-label': 'Close', 'data-dismiss': 'modal', type: 'button' }, [
+    //                         m('span', { 'aria-hidden': true }, 'x')]),
+    //                     m('h4.modal-title', { id: 'myModalLabel' }, "Edit Tutorial")
+    //                 ]),
+    //                 m('.modal-body', [
+
+    //                     // console.log(document.getElementsByClassName("content-read"))
+    //                     m('textarea', { rows:'3', type:'text', style: 'width:75%; height:175px', value: document.getElementsByClassName(".read").value }) //trying to create edit
+    //                 ]),
+    //                 m('.modal-footer', [
+    //                     m('button.btn.btn-default', { 'data-dismiss': 'modal', type: 'button' }, "Close"),
+    //                     m('button.btn.btn-primary', { type: 'button' }, "Save Changes")
+    //                 ])
+    //             ])
+    //         ])
+    //      ])
+    // ])
 }

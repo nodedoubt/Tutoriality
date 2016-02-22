@@ -3,6 +3,7 @@ var Tutorial       = require('../models/tutorials')
 var CreateTutorial = module.exports;
 var mainLayout     = require('../layouts/main.js');
 var User           = require('../models/users');
+var marked         = require('marked');
 
 
 CreateTutorial.controller = function () {
@@ -14,7 +15,6 @@ CreateTutorial.controller = function () {
   ctrl.removeStep = function (idx) {
     ctrl.tutorial.steps.splice(idx, 1)
   }
-
 }
 
 
@@ -61,7 +61,6 @@ var createTemplate = function(ctrl, options) {
                 ])
             ]),
           ]),
-
           m('br'),
           m('div', [
             m('fieldset', { style: 'margin-right: 33%; margin-left: 10px;'}, [
@@ -83,7 +82,6 @@ var makeSteps = function(ctrl) {
               placeholder: 'Give a short description of step',
               style: 'width: 75%',
               onchange: function() { step.title = this.value }
-               //on change
                }),
             m('br'),
             m('br'),
@@ -94,7 +92,6 @@ var makeSteps = function(ctrl) {
               placeholder:'Step it out!',
               style: 'width:75%; height:175px ',
               onchange: function() { step.content = this.value }
-              // onchange
                }),
             m('br'),
            ])
@@ -105,7 +102,7 @@ var makeSteps = function(ctrl) {
 
 
 var buttons = function(ctrl) {
-  return m('div', [
+  return m('div', { style:'margin-left:30%'}, [
       m(".btn-group[aria-label='...'][role='group']", [
         m("button.btn.btn-default[type='button']", {
           onclick:  function(e) { e.preventDefault(); ctrl.tutorial.steps.push( Tutorial.stepVM() ) }
@@ -114,7 +111,7 @@ var buttons = function(ctrl) {
           onclick: function(e) { e.preventDefault(); ctrl.removeStep(ctrl, this.idx) }
         }, "Delete Step"),
         m("button.btn.btn-default[type='button']", {
-          onclick: function(e) { e.preventDefault(); Tutorial.create(ctrl.tutorial); console.log(ctrl.tutorial) }
+          onclick: function(e) { e.preventDefault(); Tutorial.create(ctrl.tutorial); console.log(ctrl.tutorial); m.route('/'); }
         }, "Save"),
       ])
     ])

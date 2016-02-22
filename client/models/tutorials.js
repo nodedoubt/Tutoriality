@@ -55,14 +55,6 @@ var exampleData =[
           Title: 'Wrangle dog into water',
           Description: 'Use hotdogs or your speed to capture the dog and put it in the basin of water'
         },
-         {
-          Title: 'extra',
-          Description: 'extra extra'
-        },
-        {
-          Title: 'extra 2',
-          Description: 'Duplicate extra'
-        }
       ]
     },
     { id: 1,
@@ -94,17 +86,12 @@ var exampleData =[
         }
 ];
 
-Tutorial.soFetch = exampleData.filter(function(list) {
-    if(list['id'] === 0) {
-        return true;
-    }
-  });
-console.log('fetch', Tutorial.soFetch[0].steps)
 
-Tutorial.map = _.map(exampleData[0].steps, function(list) {
-    console.log('map', list)
-    return list
-})
+Tutorial.soFetch = exampleData.filter(function(list) {
+        if(list['id'] === list.id) {
+          return list;
+      }
+  })
 
 
 

@@ -39,14 +39,14 @@ var createTemplate = function(ctrl, options) {
             m('h2', 'Create Tutorial'),
 
           m('div', [
-            m('fieldset', { style:'margin-right: 35%; margin-left: 10px;' }, [
+            m('fieldset', { style:'margin-right: 20%; margin-left: 10px;' }, [
               m('legend', 'Tutorial Information'),
                 m('form', 'Title: ', { type: 'text' }, [
                   m('br'),
                   m('input', {
                     type: 'text',
                     placeholder: 'Enter Title',
-                    style: 'width: 55%;',
+                    style: 'width: 75%;',
                     onchange: function(e) { e.preventDefault(); ctrl.tutorial.title = this.value }
                   })
                 ]),
@@ -55,7 +55,7 @@ var createTemplate = function(ctrl, options) {
                   m('input', {
                     type: 'text',
                     placeholder: 'Enter Description',
-                    style: 'width: 55%;',
+                    style: 'width: 75%;',
                     onchange: function(e) { e.preventDefault(); ctrl.tutorial.description = this.value }
                   })
                 ])
@@ -76,12 +76,12 @@ var makeSteps = function(ctrl) {
   return m('.steps', { style: 'margin-left: 10px;'}, [
 
   ctrl.tutorial.steps.map(function(step, idx){
-    return m('form', 'Description:', { type: 'text',  style: 'margin-right: 33%;' }, [
+    return m('form', 'Description:', { type: 'text',  style: 'margin-right: 40%;' }, [
             m('br'),
             m('input', {
               type: 'text',
               placeholder: 'Give a short description of step',
-              style: 'width: 54%',
+              style: 'width: 75%',
               oninput: function() { ctrl.tutorial.steps[idx].title = this.value }
                //on change
                }),

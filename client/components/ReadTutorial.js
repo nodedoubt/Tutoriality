@@ -12,56 +12,32 @@ Read.controller = function () {
 
   ctrl.id = m.route.param('id');
   console.log('id',ctrl.id)
-  // User.confirmLoggedIn();
+  User.confirmLoggedIn();
 
-  ctrl.tutorials = null;
+  ctrl.tutorial = null;;
+  ctrl.listSteps = null
 
- // Tutorial.fetchByID(ctrl.id).then(function(tutorial) {
- //    console.log('fetch by id', tutorial)
- //    return tutorial
- // })
- 
-   Tutorial.fetchAll().then(function(tutorials) {
-    ctrl.tutorials = _.filter(tutorials, function(tutorial) {
-      if (tutorial._id === ctrl.id) {
-        return {
-          id: tutorial._id,
-          title: tutorial.title,
-          content: m('.tutorial-conent', tutorial.description)
-        }
-      }
-    })
-  });
-console.log('saasdasda', ctrl.tutorials)
-  
-  ctrl.listSteps = _.map(ctrl.tutorials, function(list) {
-    console.log('inside list steps ctrl', list)
-      return list.steps;
+  Tutorial.fetchByID(ctrl.id).then(function(tutorial) {
+     ctrl.tutorial = tutorial
   })
 };
 
 Read.view = function (ctrl, options) {
-  console.log('read view', ctrl.tutorials)
-  var id = 0;
+    var id = 0;
     var view =  m('.read', [
-      ctrl.tutorials.map(function(list) {
-        // m('.title-read', [
-        console.log('inside',list)
-            return m('legend', [
-                m('h2', list.title),
-                m('br'),
-                m('p', list.description),
-                m('.auth-edit', [
+                  m('legend', [
+                  m('h2', ctrl.tutorial.title),
+                  m('br'),
+                  m('p', ctrl.tutorial.description),
+                  m('.auth-edit', [
                   //edit  to creator of tutorial 
-                  !User.isLoggedIn() ? [
+                  User.isLoggedIn() ? [
                     m('div', editBtn(options))
                   ] : null,
                ])
-           ])
-          // ])
-        }),
+             ]),
         m('.content-steps', [
-            ctrl.listSteps.map(function(list) {
+            ctrl.tutorial.steps.map(function(list) {
               console.log('content steps', list)
                 id++
                  return m('.panel-group', { 'aria-multiselectable': 'true', id: 'accordion', role: 'tablist' }, [
@@ -75,7 +51,7 @@ Read.view = function (ctrl, options) {
                            ]),
                         m('.panel-collapse.collapse', { 'aria-labelledby': 'heading' + id, id: 'collapse' + id, role: 'tabpanel' }, [
                           m('.panel-body', [
-                            m('p', list.Description)
+                            m('p', list.content)
                           ])
                         ])
                       ])
@@ -87,8 +63,6 @@ Read.view = function (ctrl, options) {
 };
 
 var editBtn = function(options) {
-  // console.log('cccc',Tutorial.soFetch[m.route.param('id')])
-  // console.log('ctrl in edit', ctrl)
     return m('div.btn', [
         m('button.btn.btn-primary.btn-md', { 'data-target': '#myModal', 'data-toggle': 'modal', type: 'button' }, [
             m('div.edit', 'Edit')

@@ -1,21 +1,36 @@
 var m = require('mithril');
 var User = require('../models/users');
+var Notification = require('../models/notifications');
 module.exports = function(body) {
+	console.log(body);
 	return m('.main', [
 		navSubView(),
-		notificationSubView(),
+		Notification.isShown() ? notificationSubView() : null,
 		body,
 	]);
 }
 
 var notificationSubView = function() {
- return m('div.alert.alert-danger.alert-dismissible[role=alert]', [
-   m('button.close[type=button]', {'data-dismiss':'alert', 'aria-label':'Close'}, [
-     m('span[aria-hidden=true]', 'x')
-   ]),
-   m('strong', 'Error Encountered! ')
- ], 'Something went wrong!')
+ 	var attr = {
+ 		role : 'alert',
+ 	};
+	return m('div.alert.alert-danger.alert-dismissible', attr, [
+		closeButton(),
+		m('strong', 'Error Encountered! ')
+	], Notification.getMessage());
 };
+
+var closeButton = function() {
+	var attr = {
+		"data-dismiss" : 'alert',
+		'aria-label':'Close',
+	};
+	return m('button.close[type=button]', attr, [
+		m('span', {"aria-hidden" : "true"}, 'x')
+	]);
+}
+
+
 
 var navSubView = function() {
 	return m('nav.navbar.navbar-default', [

@@ -82,7 +82,7 @@ var makeSteps = function(ctrl) {
               type: 'text',
               placeholder: 'Give a short description of step',
               style: 'width: 75%',
-              oninput: function() { ctrl.tutorial.steps[idx].title = this.value }
+              onchange: function() { step.title = this.value }
                //on change
                }),
             m('br'),
@@ -93,7 +93,7 @@ var makeSteps = function(ctrl) {
               type:'text',
               placeholder:'Step it out!',
               style: 'width:75%; height:175px ',
-              oninput: function() { ctrl.tutorial.steps[idx].content = this.value }
+              onchange: function() { step.content = this.value }
               // onchange
                }),
             m('br'),
@@ -108,9 +108,11 @@ var buttons = function(ctrl) {
   return m('div', [
       m(".btn-group[aria-label='...'][role='group']", [
         m("button.btn.btn-default[type='button']", {
-          onclick:  function(e){ e.preventDefault(); ctrl.tutorial.steps.push( Tutorial.stepVM() ) }
+          onclick:  function(e) { e.preventDefault(); ctrl.tutorial.steps.push( Tutorial.stepVM() ) }
         }, "Add Step"),
-        m("button.btn.btn-default[type='button']",  "Delete Step"),
+        m("button.btn.btn-default[type='button']", {
+          onclick: function(e) { e.preventDefault(); ctrl.removeStep(ctrl, this.idx) }
+        }, "Delete Step"),
         m("button.btn.btn-default[type='button']", {
           onclick: function(e) { e.preventDefault(); Tutorial.create(ctrl.tutorial); console.log(ctrl.tutorial) }
         }, "Save"),

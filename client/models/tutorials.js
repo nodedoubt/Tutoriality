@@ -26,6 +26,7 @@ Tutorial.tutorial.steps    = [];
 
 var idCount = 1;
 
+
 Tutorial.tutorialVM = function () {
   return {
     title: '',

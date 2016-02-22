@@ -8,7 +8,6 @@ Tutorial.fetchAll = function() {
 }
 
 Tutorial.fetchByID = function(id) {
-  console.log('model id',id)
 	return m.request({method : 'GET', url : '/api/tutorials/' + id});
 }
 

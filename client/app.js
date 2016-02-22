@@ -14,6 +14,7 @@ m.route.mode = "hash"
 m.route(document.getElementById('app'), '/', {
   '/'   : require('./components/TutorialList'),
   '/list'   : require('./components/TutorialList'),
+  '/edit/:id' : require('./components/CreateTutorial'),
   '/create' : require('./components/CreateTutorial'),
   '/read/:id'   : require('./components/ReadTutorial'),
   '/example-list' : require('./components/ExampleList'),

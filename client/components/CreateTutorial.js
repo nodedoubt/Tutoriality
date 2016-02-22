@@ -9,27 +9,32 @@ var CreateTutorial = module.exports;
 //assume options object tutorial_id
 // pass in options
 CreateTutorial.controller = function () {
-  var ctrl = this
+  var ctrl = this;
 
-  ctrl.tutorial_id = false;
+  ctrl.tutorialID = function() {
+    return m.route.param('id');
+  };
 
-
-  ctrl.checkForTutorialId = function(){
-    if(!ctrl.tutorial_id) {
-      ctrl.tutorial = Tutorial.tutorialVM()
-    }
-    else {
-      Tutorial.fetchById(tutorial_id)
+  ctrl.populate = function() {
+    var tutorialID = ctrl.tutorialID();
+    ctrl.tutorial = null;
+    if(tutorialID) {
+       Tutorial.fetchByID(tutorialID)
       .then(function(tutorial){
-        ctrl.idCheck = true;
         ctrl.tutorial = tutorial;
       })
+    }
+    else {
+      ctrl.tutorial = Tutorial.tutorialVM()
     }
   }
 
   ctrl.save = function (tutorial) {
-    if(ctrl.idCheck) {
-      Tutorial.update(tutorial)
+    var tutorialID = ctrl.tutorialID();
+    if(tutorialID) {
+      delete tutorial['_id'];
+      console.log(tutorial);
+      Tutorial.updateByID(tutorialID, tutorial);
     }
     else {
       Tutorial.create(tutorial)
@@ -42,8 +47,7 @@ CreateTutorial.controller = function () {
   }
 
   User.confirmLoggedIn();
-  ctrl.checkForTutorialId();
-
+  ctrl.populate();
 }
 
 CreateTutorial.view = function (ctrl, options) {
@@ -71,6 +75,7 @@ var createTemplate = function(ctrl, options) {
                     type: 'text',
                     placeholder: 'Enter Title',
                     style: 'width: 75%;',
+                    value : ctrl.tutorial.title,
                     onchange: function(e) { e.preventDefault(); ctrl.tutorial.title = this.value }
                   })
                 ]),
@@ -80,6 +85,7 @@ var createTemplate = function(ctrl, options) {
                     type: 'text',
                     placeholder: 'Enter Description',
                     style: 'width: 75%;',
+                    value : ctrl.tutorial.description,
                     onchange: function(e) { e.preventDefault(); ctrl.tutorial.description = this.value }
                   })
                 ])
@@ -105,6 +111,7 @@ var makeSteps = function(ctrl) {
               type: 'text',
               placeholder: 'Give a short description of step',
               style: 'width: 75%',
+              value : step.title,
               onchange: function() { step.title = this.value }
                }),
             m('br'),
@@ -115,6 +122,7 @@ var makeSteps = function(ctrl) {
               type:'text',
               placeholder:'Step it out!',
               style: 'width:75%; height:175px ',
+              value : step.content,
               onchange: function() { step.content = this.value }
                }),
             m('br'),

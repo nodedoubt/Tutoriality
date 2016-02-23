@@ -1,6 +1,6 @@
 var OAuth = require('oauthio');
 // var credentials = require('./config.js').credentials.oauth;
-OAuth.initialize("2dtinySKQP0jVXxfP5_O7dwZq_M", "Nx8zeUlnczRitqwuam9HhzxjV9U");
+OAuth.initialize(process.env.OAUTH_PUBLIC_KEY, process.env.OAUTH_SECRET_KEY);
 OAuth.confirmLogin = function(request, response, next) {
   var credentials = request.getCredentials();
   console.log('here are the creds', credentials)

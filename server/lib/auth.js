@@ -1,6 +1,5 @@
 var OAuth = require('oauthio');
-var credentials = require('./config.js').credentials.oauth;
-OAuth.initialize(credentials.key, credentials.secret);
+OAuth.initialize(process.env.OAUTHIO_PUBLIC_KEY);
 OAuth.confirmLogin = function(request, response, next) {
 	OAuth.auth('github', request.session).then(function(){
 		next();

@@ -22,4 +22,5 @@ m.route(document.getElementById('app'), '/', {
   '/read/:id'   : require('./components/ReadTutorial'),
   '/example-list' : require('./components/ExampleList'),
   '/sign-in' : require('./components/Login'),
+  '/profile' : require('./components/Profile'),
 })

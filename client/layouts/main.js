@@ -10,6 +10,12 @@ module.exports = function(body) {
 	]);
 }
 
+// var container = function(){
+// 	return m('.container',[
+// 		m('h1', "You guys rock and are amazing!!")
+// 		]);
+// }
+
 var notificationSubView = function() {
  	var attr = {
  		role : 'alert',

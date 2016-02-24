@@ -2,8 +2,9 @@ var m = require('mithril');
 
 var OAuth = require('../lib/oauth.min.js').OAuth;
 var OAuthUser = require('../lib/oauth.min.js').User;
+var config = require('../../server/lib/config');
 
-OAuth.initialize('t2PEPMuehspsbZXlrrx9Xr2SWMg');
+OAuth.initialize(config.credentials.oauth.key);
 
 var User = module.exports;
 

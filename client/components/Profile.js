@@ -29,8 +29,8 @@ Profile.view = function (ctrl, options) {
   };
   var view = m('.container', [
       m('.col-sm-12 .col-md-6  .offset-md-3',[
-        m('img', { src: "#", width: '100', height: '200' }),
-        m('h2', 'Lucy Fer'),
+        m('img', { src: User.getPic(), width: '200', height: '200' }),
+        m('h2', User.getName()),
         m('hr'),
         m('h2', 'My Tutorials'),
         //render my tutorials

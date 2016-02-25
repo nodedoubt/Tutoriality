@@ -56,3 +56,13 @@ User.getInfo = function() {
 User.getID = function() {
 	return User.getInfo().token;
 }
+
+User.getName = function(){
+	return User.getInfo().data.firstname + ' ' + User.getInfo().data.lastname;
+}
+
+
+User.getPic = function(){
+	return User.getInfo().data.avatar;
+
+}

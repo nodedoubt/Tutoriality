@@ -17,8 +17,6 @@ Tutorial.find = function(query) {
     query.created_by = db.getMongoID(query.created_by);
   }
   // the id can be undefined
-  console.log("the query in the server model", query)
-
 	return collection().find(query);
 }
 

@@ -36,7 +36,8 @@ Profile.view = function (ctrl, options) {
         //render my tutorials
         ctrl.tutorials.map(function(tutorial) {
           return m('div.panel.panel-default', [
-            m('div', editBtn(options, tutorial)),
+            m('div', editBtn(tutorial)),
+            m('div', dltBtn(tutorial)),
             m('div.panel-heading', [
               m('h3.panel-title.list-link', {onclick: function(e){
                 // grab tutorial id and pass to read using variadic route
@@ -51,10 +52,16 @@ Profile.view = function (ctrl, options) {
   return mainLayout(view);
 }
 
-var editBtn = function(options, tutorial) {
+  var editBtn = function(tutorial) {
     return m('button.btn', {onclick : function(){
       m.route('/edit/' + tutorial.id);
     }}, "Edit")
+  }
+
+    var dltBtn = function(tutorial) {
+    return m('button.btn', {onclick : function(){
+      m.route('/edit/' + tutorial.id);
+    }}, "Delete")
   }
 
 

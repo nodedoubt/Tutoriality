@@ -8,6 +8,7 @@ var collection = function() {
 
 User.findAndModify = function(user) {
   var githubUsername = user.alias;
+  console.log("in server model", user)
   user.favorites = [];
   return collection().findAndModify({
     query: { alias: githubUsername },

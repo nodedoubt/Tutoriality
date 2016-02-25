@@ -1,4 +1,5 @@
 var db = require('../lib/db.js')
+var user = require('./user');
 var Tutorial = {};
 module.exports = Tutorial;
 
@@ -6,7 +7,12 @@ var collection = function() {
 	return db.collection('tutorials')
 }
 
+var ucollection = function() {
+  return db.collection('users')
+}
+
 Tutorial.insert = function(tutorial) {
+  tutorial.created_by = db.getMongoID(tutorial.created_by)
 	return collection().insert(tutorial);
 }
 

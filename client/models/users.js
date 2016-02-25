@@ -17,7 +17,17 @@ User.signIn = function() {
 		//when popup is successfully signed in, OAuthUser actually signs into the app
     return OAuthUser.signin(res)
 	}).then(function(user){
-    return m.request({method : 'POST', url : '/api/users', data : user.data});
+    return m.request({method : 'POST', url : '/api/users', data : user.data})
+    .then(function(user){
+      console.log("our user info is", user)
+      var ouser = User.getInfo()
+      ouser.data._id = user.value._id
+      ouser.save().done(function() {
+          return user;
+      }).fail(function(err) {
+          throw err;
+      });
+    });
   })
   .fail(function(error){
 		console.log(error);
@@ -54,15 +64,13 @@ User.getInfo = function() {
 }
 //calls the get info function and returns the unique token to that user.
 User.getID = function() {
-	return User.getInfo().token;
+	return User.getInfo().data._id;
 }
 
 User.getName = function(){
 	return User.getInfo().data.firstname + ' ' + User.getInfo().data.lastname;
 }
 
-
 User.getPic = function(){
 	return User.getInfo().data.avatar;
-
 }

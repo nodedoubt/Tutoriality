@@ -6,7 +6,10 @@ module.exports = function(body) {
 	return m('.main', [
 		navSubView(),
 		Notification.isShown() ? notificationSubView() : null,
-		body,
+		m('.container',[
+			m('.col-sm-12 .col-md-6  .offset-md-3',[
+				body]),
+		]),
 	]);
 }
 

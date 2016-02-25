@@ -3,6 +3,7 @@ module.exports = {
     {
       title : "Getting Started with Tutoriality",
       description : "How to create your first tutorial using Tutoriality.",
+      created_by: "dave",
       steps : [
         {
           title : "Sign In ",
@@ -21,6 +22,7 @@ module.exports = {
     {
       title : "Computer troubleshooting",
       description : "How to fix your computer",
+      created_by: "dave",
       steps : [
         {
           title : "Plug check",

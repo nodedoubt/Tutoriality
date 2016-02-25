@@ -40,7 +40,6 @@ module.exports = {
         {
           title: "Peruse Results",
           content: "Browse your search results and determine if there's a good match. If not, let your results improve your search term and phrase and search again."
-
         },
       ],
     },    

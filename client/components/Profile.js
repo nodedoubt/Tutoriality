@@ -8,7 +8,8 @@ var Tutorial = require('../models/tutorials.js')
 Profile.controller = function () {
   var ctrl = this;
   ctrl.tutorials = [];
-  Tutorial.fetchAll({ created_by: User.getID()}).then(function(tutorials) {
+  console.log("the userid we're passing", User.getID().toString())
+  Tutorial.fetchByUserID(User.getID()).then(function(tutorials) {
     console.log(tutorials)
     ctrl.tutorials = _.map(tutorials, function(tutorial) {
         return {

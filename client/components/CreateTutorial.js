@@ -52,7 +52,8 @@ CreateTutorial.controller = function () {
 
 //This removes the first step.
   ctrl.removeStep = function (idx) {
-    ctrl.tutorial.steps.splice(0, idx)
+    console.log('all steps: ', ctrl.tutorial.steps);
+    ctrl.tutorial.steps.pop();
   }
 //confirms login:
   User.confirmLoggedIn();
@@ -159,7 +160,7 @@ var buttons = function(ctrl) {
         }, "Add Step"),
         m("button.btn.btn.btn-primary.btn-lrg[type='button']", {
           //calls the delete step function
-          onclick: function(e) { e.preventDefault(); ctrl.removeStep(ctrl, this.idx) }
+          onclick: function(e) { e.preventDefault(); ctrl.removeStep(this.idx) }
         }, "Delete Step"),
         m("button.btn.btn.btn-primary.btn-lrg[type='button']", {
           //calls the ctrl.save function which updates or creates, and then reroutes back to the main page
@@ -171,9 +172,9 @@ var buttons = function(ctrl) {
     ])
 }
 //Deletes step. should possibly be in model?
-var removeStep = function(ctrl, idx) {
-  if (ctrl.tutorial.steps.length >= 2) {
-    return m('button', { onclick: ctrl.tutorial.removeStep(idx) }, 'Remove Step')
-  }
-}
+// var removeStep = function(ctrl, idx) {
+//   if (ctrl.tutorial.steps.length >= 2) {
+//     return m('button', { onclick: ctrl.tutorial.removeStep(idx) }, 'Remove Step')
+//   }
+// }
 

@@ -28,11 +28,10 @@ Read.controller = function () {
 };
 
 Read.view = function (ctrl, options) {
-    var id = 0;
+    // var id = 0;
     var view =  m('.read', [
                   m('legend', [
                   m('h2', ctrl.tutorial.title),
-                  m('br'),
                   m('p', ctrl.tutorial.description),
                   m('.auth-edit', [
                   //edit  to creator of tutorial
@@ -42,25 +41,26 @@ Read.view = function (ctrl, options) {
                ])
              ]),
         m('.content-steps', [
-            ctrl.tutorial.steps.map(function(list) {
-              console.log('content steps', list)
-                id++
-                 return m('.panel-group', { 'aria-multiselectable': 'true', id: 'accordion', role: 'tablist' }, [
-                          m('.panel.panel-default', [
-                            m('.panel-heading', { id: 'heading' + id, role: 'tab' }, [
-                              m('h4.panel-title', [
-                                m('a', { 'aria-controls': 'collapse' + id, 'aria-expanded': 'false', 'data-parent': '#accordion', 'data-toggle': 'collapse', href: '#collapse' + id, role: 'button' }, [
-                                  m('h3', list.title)
-                               ])
-                             ])
-                           ]),
-                        m('.panel-collapse.collapse', { 'aria-labelledby': 'heading' + id, id: 'collapse' + id, role: 'tabpanel' }, [
-                          m('.panel-body', [
-                            m('p', m.component(MarkDownText, list.content))
+            ctrl.tutorial.steps.map(function(list, index) {
+              index = index+1;
+              console.log('content steps', list);
+                // id++
+                 // return m('.panel-group', { 'aria-multiselectable': 'true', id: 'accordion', role: 'tablist' }, [
+                          return m('div', {'aria-multiselectable': 'true'}, [
+                            // m('.panel-heading', { id: 'heading' + id, role: 'tab' }, [
+                              // m('h4.panel-title', [
+                                // m('a', { 'aria-controls': 'collapse' + id, 'aria-expanded': 'false', 'data-parent': '#accordion', href: '#collapse' + id, role: 'button' }, [
+                                  m('h3', 'Step ' + index + ': ' + list.title),
+                               // ])
+                              // ]),
+                            // ]),
+                          // m('.panel-collapse', { 'aria-labelledby': 'heading' + id, id: 'collapse' + id, role: 'tabpanel' }, [
+                            m('.panel-body', [
+                              m('p', m.component(MarkDownText, list.content))
+                            ])
                           ])
-                        ])
-                      ])
-               ])
+                        // ])
+               // ])
             })
         ])
     ]);

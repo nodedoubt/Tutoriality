@@ -17,7 +17,8 @@ module.exports = {
 	],
   users : [
     {
-      alias : 'dave'
+      alias : 'dave',
+      favorites: []
     }
   ]
 }

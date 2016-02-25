@@ -10,7 +10,6 @@ Profile.controller = function () {
   ctrl.tutorials = [];
   Tutorial.fetchAll().then(function(tutorials) {
     ctrl.tutorials = _.map(tutorials, function(tutorial) {
-      console.log(tutorial)
         return {
           id: tutorial._id,
           title: tutorial.title,
@@ -33,9 +32,12 @@ Profile.view = function (ctrl, options) {
         m('h2', User.getName()),
         m('hr'),
         m('h2', 'My Tutorials'),
+        //m('div', editBtn(options, ctrl.tutorial)),
         //render my tutorials
         ctrl.tutorials.map(function(tutorial) {
           return m('div.panel.panel-default', [
+            m('div', editBtn(tutorial)),
+            m('div', dltBtn(tutorial)),
             m('div.panel-heading', [
               m('h3.panel-title.list-link', {onclick: function(e){
                 // grab tutorial id and pass to read using variadic route
@@ -44,12 +46,25 @@ Profile.view = function (ctrl, options) {
             ])
           ],
           m('div.panel-body', tutorial.content.children[0]));
-        })
+        }),
+        m('hr'),
+        m('h2', 'My Progress'),
       ])
   ]);
   return mainLayout(view);
 }
 
+  var editBtn = function(tutorial) {
+    return m('button.btn', {onclick : function(){
+      m.route('/edit/' + tutorial.id);
+    }}, "Edit")
+  }
+
+    var dltBtn = function(tutorial) {
+    return m('button.btn', {onclick : function(){
+      m.route('/edit/' + tutorial.id);
+    }}, "Delete")
+  }
 
 
       // ctrl.tutorials.map(function(tutorial) {

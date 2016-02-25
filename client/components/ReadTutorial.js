@@ -28,7 +28,7 @@ Read.controller = function () {
 };
 
 Read.view = function (ctrl, options) {
-    var id = 0;
+    // var id = 0;
     var view =  m('.read', [
                   m('legend', [
                   m('h2', ctrl.tutorial.title),
@@ -41,15 +41,16 @@ Read.view = function (ctrl, options) {
                ])
              ]),
         m('.content-steps', [
-            ctrl.tutorial.steps.map(function(list) {
-              console.log('content steps', list)
-                id++
+            ctrl.tutorial.steps.map(function(list, index) {
+              index = index+1;
+              console.log('content steps', list);
+                // id++
                  // return m('.panel-group', { 'aria-multiselectable': 'true', id: 'accordion', role: 'tablist' }, [
-                          return m('', [
+                          return m('div', {'aria-multiselectable': 'true'}, [
                             // m('.panel-heading', { id: 'heading' + id, role: 'tab' }, [
                               // m('h4.panel-title', [
                                 // m('a', { 'aria-controls': 'collapse' + id, 'aria-expanded': 'false', 'data-parent': '#accordion', href: '#collapse' + id, role: 'button' }, [
-                                  m('h3', id + ': ' + list.title),
+                                  m('h3', 'Step ' + index + ': ' + list.title),
                                // ])
                               // ]),
                             // ]),

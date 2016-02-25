@@ -19,7 +19,6 @@ User.signIn = function() {
 	}).then(function(user){
     return m.request({method : 'POST', url : '/api/users', data : user.data})
     .then(function(user){
-      console.log("our user info is", user)
       var ouser = User.getInfo()
       ouser.data._id = user.value._id
       ouser.save().done(function() {

@@ -46,7 +46,9 @@ Profile.view = function (ctrl, options) {
             ])
           ],
           m('div.panel-body', tutorial.content.children[0]));
-        })
+        }),
+        m('hr'),
+        m('h2', 'My Progress'),
       ])
   ]);
   return mainLayout(view);

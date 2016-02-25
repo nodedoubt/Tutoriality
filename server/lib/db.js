@@ -6,6 +6,7 @@ var _ = require('underscore');
 db.deleteEverything = function () {
   return Promise.all([
     db.collection('tutorials').remove(),
+    db.collection('users').remove()
   ])
 }
 

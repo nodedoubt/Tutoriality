@@ -17,6 +17,9 @@ Profile.controller = function () {
         };
       });
   });
+  ctrl.delete = function(dlt){
+    Tutorial.delete(dlt)
+  }
 }
 
 
@@ -36,7 +39,10 @@ Profile.view = function (ctrl, options) {
         ctrl.tutorials.map(function(tutorial) {
           return m('div.panel.panel-default', [
             m('div', editBtn(tutorial)),
-            m('div', dltBtn(tutorial)),
+            m('button.btn', {onclick: function(e){
+              e.preventDefault();
+              ctrl.delete(tutorial.id);
+            }},'Delete me Baby'),
             m('div.panel-heading', [
               m('h3.panel-title.list-link', {onclick: function(e){
                 // grab tutorial id and pass to read using variadic route
@@ -58,11 +64,14 @@ Profile.view = function (ctrl, options) {
     }}, "Edit")
   }
 
-    var dltBtn = function(tutorial) {
-    return m('button.btn', {onclick : function(){
-      m.route('/edit/' + tutorial.id);
-    }}, "Delete")
-  }
+  //onclick:  function(e) { e.preventDefault(); ctrl.tutorial.steps.push( Tutorial.stepVM() );}
+
+  // var dltBtn = function(tutorial) {
+  //   return m('button.btn', {onclick : function(e){
+  //     e.preventDefault();
+  //     ctrl.delete(tutorial.id);
+  //   }}, "Delete")
+  // }
 
 
       // ctrl.tutorials.map(function(tutorial) {

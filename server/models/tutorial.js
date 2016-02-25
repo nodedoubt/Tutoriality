@@ -33,3 +33,6 @@ Tutorial.update = function(query, updateFields) {
 Tutorial.updateByID = function(id, updateFields) {
 	return Tutorial.update({_id : db.getMongoID(id)}, updateFields);
 }
+Tutorial.delete = function(id) {
+	console.log("this is id", id);
+}

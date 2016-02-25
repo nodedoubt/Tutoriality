@@ -35,5 +35,4 @@ Tutorial.updateByID = function(id, updateFields) {
 }
 Tutorial.delete = function(id) {
   return collection().remove({_id : db.getMongoID(id)}, 1);
-	//console.log("this is id", id);
 }

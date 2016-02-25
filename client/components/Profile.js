@@ -18,7 +18,11 @@ Profile.controller = function () {
       });
   });
   ctrl.delete = function(dlt){
-    Tutorial.delete(dlt)
+    Tutorial.delete(dlt).then(function(res){
+      console.log(ctrl.tutorials);
+      console.log('i am the id you need',dlt)
+      //Tutorial.fetchAll();
+    })
   }
 }
 

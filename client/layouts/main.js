@@ -33,7 +33,7 @@ var closeButton = function() {
 
 
 var navSubView = function() {
-	return m('nav.navbar.navbar-default', [
+	return m('nav.navbar-default', [
 		m('div.container-fluid', [
 			m('div.navbar-header', [
 				m('a.navbar-brand[href="/"]', {config: m.route}, 'Tutoriality')

@@ -70,7 +70,7 @@ function panelBody(section, index) {
 
 	// this is the actual content that will be hidden or
 	// shown inside of the accordion
-	return m('.panel-collapse.collapse', attributes, [
+	return m('.panel-collapse', attributes, [
 		m('.panel-body', [
 			section.content,
 		])
@@ -91,12 +91,12 @@ function panelTitle(section, index, id) {
 	var sectionID = getSectionID(index);
 	var attributes = {
 		role : "button", 
-		"data-toggle" : "collapse", 
+		// "data-toggle" : "collapse", 
 		"data-parent" : "#" + id,
 		href : "#" + sectionID,
 		//  this dictates whether or not accordions
 		// will be open by default
-		"aria-expanded" : "false",
+		"aria-expanded" : "true",
 		"aria-controls" : sectionID,
 	};
 	return m('h4.panel-title', [

@@ -20,7 +20,8 @@
 
 /* Specific styles for the list view page */
 .listView h1 {
-  text-align: center;
+  text-align: left;
+  margin: 25px 10px;
   font-weight: 200;
   font-size: 28px;
   letter-spacing: 1px;

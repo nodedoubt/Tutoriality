@@ -12,6 +12,10 @@ Tutorial.fetchAll = function() {
 Tutorial.fetchByID = function(id) {
 	return m.request({method : 'GET', url : '/api/tutorials/' + id});
 }
+Tutorial.fetchByUserID = function(userID) {
+  console.log("the userId", userID)
+  return m.request({method : 'GET', url : '/api/tutorials?created_by=' + userID});
+}
 //creates a new database entry for a given tutorial
 Tutorial.create = function(tutorial) {
 	return m.request({method : 'POST', url : '/api/tutorials', data : tutorial});

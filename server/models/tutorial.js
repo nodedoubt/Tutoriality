@@ -7,18 +7,18 @@ var collection = function() {
 	return db.collection('tutorials')
 }
 
-var ucollection = function() {
-  return db.collection('users')
-}
-
 Tutorial.insert = function(tutorial) {
   tutorial.created_by = db.getMongoID(tutorial.created_by)
 	return collection().insert(tutorial);
 }
 
 Tutorial.find = function(query) {
-	var query = query || {};
-	// the id can be undefined
+  if(query.created_by){
+    query.created_by = db.getMongoID(query.created_by);
+  }
+  // the id can be undefined
+  console.log("the query in the server model", query)
+
 	return collection().find(query);
 }
 

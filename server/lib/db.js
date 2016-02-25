@@ -24,6 +24,7 @@ db.loadFixtures = function() {
 		})
 	});
 }
+db.collection('users').createIndex( { "alias": 1 }, { unique: true } )
 
 db.getMongoID = function(idString) {
 	return pmongo.ObjectId(idString);

@@ -29,7 +29,7 @@ Read.controller = function () {
 
 Read.view = function (ctrl, options) {
     // var id = 0;
-    var view =  m('.content-read.col-md-6.col-md-offset-3.col-sm-12', [
+    var view =  m('.content-read', [
                   m('.tutorial-header', [
                   m('h2', ctrl.tutorial.title),
                   m('p', ctrl.tutorial.description),

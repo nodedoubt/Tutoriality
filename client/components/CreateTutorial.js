@@ -63,7 +63,7 @@ CreateTutorial.controller = function () {
 //Main Create view composed of all sub views in desired order of appearance
 CreateTutorial.view = function (ctrl, options) {
   //what is going to be included in the create view tutorial
-    var view = m('.col-md-6.col-md-offset-3.col-sm-12', [
+    var view = m('.tutorial-view', [
       createTemplate(ctrl),
       stepHeader(ctrl),
       makeSteps(ctrl),
@@ -80,7 +80,7 @@ var createTemplate = function(ctrl, options) {
   return m('.CreateTutorial', [
             m('h2', 'Create Tutorial'),
           m('div', [
-            m('fieldset', { style:'margin-right: 20%; margin-left: 10px;' }, [
+            m('fieldset', [
               m('legend', 'Tutorial Information'),
                 m('form', 'Title: ', { type: 'text' }, [
                   m('br'),
@@ -112,7 +112,7 @@ var createTemplate = function(ctrl, options) {
 var stepHeader = function() {
     return m('div', [
             m('br'),
-            m('fieldset', { style: 'margin-right: 33%; margin-left: 10px;'}, [
+            m('fieldset', [
               m('legend', 'Step Information'),
             ])
           ])
@@ -120,7 +120,7 @@ var stepHeader = function() {
 
 //Make steps sub view:
 var makeSteps = function(ctrl) {
-  return m('.steps', { style: 'margin-left: 10px;'}, [
+  return m('.steps', [
 //maps over objects in steps array and creates input fields for properties in objects
   ctrl.tutorial.steps.map(function(step, idx){
     return m('form', 'Description:', { type: 'text',  style: 'margin-right: 40%;' }, [
@@ -152,7 +152,7 @@ var makeSteps = function(ctrl) {
 
 //add step, delete step, save tutorial buttons
 var buttons = function(ctrl) {
-  return m('div', { style:'margin-left:30%;'}, [
+  return m('.button-container', [
       m(".btn-group[aria-label='...'][role='group']", [
         m("button.btn.btn-primary.btn-lrg[type='button']", {
           //onclick pushes a new step object into the steps array, the map function maps over it and changes view

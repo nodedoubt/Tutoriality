@@ -15,4 +15,9 @@ module.exports = {
 			],
 		},
 	],
+  users : [
+    {
+      alias : 'dave'
+    }
+  ]
 }

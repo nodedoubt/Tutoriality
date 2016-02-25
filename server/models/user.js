@@ -8,6 +8,7 @@ var collection = function() {
 
 User.findAndModify = function(user) {
   var githubUsername = user.alias;
+  user.favorites = [];
   return collection().findAndModify({
     query: { alias: githubUsername },
     update: user, 

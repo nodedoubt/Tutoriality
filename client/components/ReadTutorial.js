@@ -50,7 +50,7 @@ Read.view = function (ctrl, options) {
                             // m('.panel-heading', { id: 'heading' + id, role: 'tab' }, [
                               // m('h4.panel-title', [
                                 // m('a', { 'aria-controls': 'collapse' + id, 'aria-expanded': 'false', 'data-parent': '#accordion', href: '#collapse' + id, role: 'button' }, [
-                                  m('h3', 'Step ' + index + ': ' + list.title),
+                                  m('h3', list.title),
                                // ])
                               // ]),
                             // ]),

@@ -81,7 +81,7 @@ var createTemplate = function(ctrl, options) {
             m('h2', 'Create Tutorial'),
           m('div', [
             m('fieldset', [
-              m('legend', 'Tutorial Information'),
+              // m('legend', 'Tutorial Information'),
                 m('form', 'Title: ', { type: 'text' }, [
                   m('br'),
                   m('input', {
@@ -95,7 +95,7 @@ var createTemplate = function(ctrl, options) {
                 ]),
                 m('form', 'Description: ', { type: 'text' }, [
                   m('br'),
-                  m('input', {
+                  m('textarea', {
                     type: 'text',
                     placeholder: 'Enter Description',
                     style: 'width: 75%;',
@@ -113,7 +113,7 @@ var stepHeader = function() {
     return m('div', [
             m('br'),
             m('fieldset', [
-              m('legend', 'Step Information'),
+              m('legend', 'Create your steps!'),
             ])
           ])
 }
@@ -123,7 +123,7 @@ var makeSteps = function(ctrl) {
   return m('.steps', [
 //maps over objects in steps array and creates input fields for properties in objects
   ctrl.tutorial.steps.map(function(step, idx){
-    return m('form', 'Description:', { type: 'text',  style: 'margin-right: 40%;' }, [
+    return m('form', 'Step Title:', { type: 'text',  style: 'margin-right: 40%;' }, [
             m('br'),
             m('input', {
               type: 'text',
@@ -134,7 +134,7 @@ var makeSteps = function(ctrl) {
                }),
             m('br'),
             m('br'),
-            m('form', 'Step #' + (idx+1), { type: 'text' }),
+            m('form', { type: 'text' }),
             m('textarea.form-control', {
               rows:'3',
               type:'text',
@@ -158,15 +158,15 @@ var buttons = function(ctrl) {
           //onclick pushes a new step object into the steps array, the map function maps over it and changes view
           onclick:  function(e) { e.preventDefault(); ctrl.tutorial.steps.push( Tutorial.stepVM() );}
         }, "Add Step"),
-        m("button.btn.btn.btn-primary.btn-lrg[type='button']", {
+        m("button.btn.btn-primary.btn-lrg[type='button']", {
           //calls the delete step function
           onclick: function(e) { e.preventDefault(); ctrl.removeStep(this.idx) }
         }, "Delete Step"),
-        m("button.btn.btn.btn-primary.btn-lrg[type='button']", {
+        m("button.btn.btn-success.btn-lrg[type='button']", {
           //calls the ctrl.save function which updates or creates, and then reroutes back to the main page
           onclick: function(e) { e.preventDefault(); ctrl.save(ctrl.tutorial); m.route('/'); }
         }, "Save"),
-        m("button.btn.btn.btn-danger.button-lrg[type='button']", {
+        m("button.btn.btn-danger.button-lrg[type='button']", {
           onclick: function(e) {e.preventDefault(); m.route('/'); }
         }, "Cancel"),
       ]),

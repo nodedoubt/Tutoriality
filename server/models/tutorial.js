@@ -13,9 +13,12 @@ Tutorial.insert = function(tutorial) {
 }
 
 Tutorial.find = function(query) {
+  if(query.created_by){
+    query.created_by = db.getMongoID(query.created_by);
+  }
+  // the id can be undefined
   console.log("the query in the server model", query)
-	var query = query || {};
-	// the id can be undefined
+
 	return collection().find(query);
 }
 

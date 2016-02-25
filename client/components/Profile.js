@@ -26,8 +26,7 @@ Profile.view = function (ctrl, options) {
       ctrl.signIn();
     }
   };
-  var view = m('.container', [
-      m('.col-sm-12 .col-md-6  .offset-md-3',[
+  var view = m('.profile', [
         m('img', { src: User.getPic(), width: '200', height: '200' }),
         m('h2', User.getName()),
         m('hr'),
@@ -50,7 +49,6 @@ Profile.view = function (ctrl, options) {
         m('hr'),
         m('h2', 'My Progress'),
       ])
-  ]);
   return mainLayout(view);
 }
 

@@ -9,24 +9,19 @@
 
 .tutorial-header {
   text-align: left;
-  border-bottom: 3px #eee solid;
 }
 
 .tutorial-header > h2 {
 	font-size:32px;
 	font-weight: 200;
-	margin: 25px 0px 0px 25px;
 	color: #317eac;
-  width: 90%;
 
 }
 
 .tutorial-header > p {
 	margin: 0 auto;
 	font-weight: 200;
-	padding-bottom: 30;
-  width: 90%;
-
+	padding-bottom: 30px;
 }
 
 div.btn {
@@ -36,20 +31,29 @@ div.btn {
 	/*width:22%;*/
 }
 
+.step-btns {
+  width: 100%;
+}
+
+button.add-step-btn {
+  width: 100%;
+}
+
+button.save-step-btn {
+  float: right;
+}
+
 .content-steps {
-  text-align:left;
-  width: 90%;
-  margin: 0 auto;
-  /*height: 500px;*/
-  background-color: transparent;
-  /*border: 1px solid #eee;*/
+
+  border-top: 3px solid #eee;
 }
 
 h3 {
 	font-size: 16px;
-	/*text-decoration: underline;*/
 }
 
+p.lead {
+}
 .panel-body {
 
 }

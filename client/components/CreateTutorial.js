@@ -80,6 +80,10 @@ CreateTutorial.view = function (ctrl, options) {
 var createTemplate = function(ctrl, options) {
 
   return m('.CreateTutorial', [
+          m("button.save-step-btn.btn.btn-success.btn-md[type='button']", {
+            //calls the ctrl.save function which updates or creates, and then reroutes back to the main page
+            onclick: function(e) { e.preventDefault(); ctrl.save(ctrl.tutorial); m.route('/'); }
+          }, "Save"),
           m('h1', 'Create Tutorial'),
           m('div', [
             m('fieldset', [
@@ -125,12 +129,13 @@ var makeSteps = function(ctrl) {
   return m('.steps', [
 //maps over objects in steps array and creates input fields for properties in objects
     ctrl.tutorial.steps.map(function(step, idx){
-      return  m('.panel', [
-                m('.panel-header', [
+      return  m('.panel.panel-default', [
+                m('.panel-heading', [
                   m('i.fa.fa-trash.pull-right', { onclick: function(e) { e.preventDefault(); ctrl.removeStep(idx) } }),
-                  m('form', 'Step Title:', { type: 'text',  style: 'margin-right: 40%;' }, [
+                  m('form', 'Step ' + (1 + idx), { type: 'text',  style: 'margin-right: 40%;' }, [
                     m('br'),
                   ]),
+                ]),                  
                   m('.panel-body', [
                     m('input.form-control', {
                       type: 'text',
@@ -151,7 +156,6 @@ var makeSteps = function(ctrl) {
                     }),
                     m('br'),
                   ])
-                ])
               ])
     })
   ])
@@ -161,18 +165,11 @@ var makeSteps = function(ctrl) {
 //add step, delete step, save tutorial buttons
 var buttons = function(ctrl) {
   return m('.button-container', [
-      m(".btn-group[aria-label='...'][role='group']", [
-        m("button.btn.btn-primary.btn-lrg[type='button']", {
+      m(".step-btns.btn-group[aria-label='...'][role='group']", [
+        m("button.add-step-btn.btn.btn-primary.btn-lg[type='button']", {
           //onclick pushes a new step object into the steps array, the map function maps over it and changes view
           onclick:  function(e) { e.preventDefault(); ctrl.tutorial.steps.push( Tutorial.stepVM() );}
         }, "Add Step"),
-        m("button.btn.btn-success.btn-lrg[type='button']", {
-          //calls the ctrl.save function which updates or creates, and then reroutes back to the main page
-          onclick: function(e) { e.preventDefault(); ctrl.save(ctrl.tutorial); m.route('/'); }
-        }, "Save"),
-        m("button.btn.btn-danger.button-lrg[type='button']", {
-          onclick: function(e) {e.preventDefault(); m.route('/'); }
-        }, "Cancel"),
       ]),
       m('br'),
       m('br'),

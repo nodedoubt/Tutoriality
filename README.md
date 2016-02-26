@@ -7,6 +7,7 @@
   - __Product Owner__: Clay Branch
   - __Scrum Master__: Grant Redfearn
   - __Development Team Members__: Daniel Dinh, Veronica Hernandez
+  - __Legacy Members__: Austin Kovach, Carly Levy, Joseph Pena, Justin Seiter, TJ Martin
 
 
 ## Table of Contents

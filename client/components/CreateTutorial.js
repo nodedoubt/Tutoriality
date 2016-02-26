@@ -53,7 +53,9 @@ CreateTutorial.controller = function () {
 //This removes the first step.
   ctrl.removeStep = function (idx) {
     console.log('all steps: ', ctrl.tutorial.steps);
-    ctrl.tutorial.steps.pop();
+    console.log('index:', idx)
+    ctrl.tutorial.steps.splice(idx, 1);
+    console.log('after:', ctrl.tutorial.steps)
   }
 //confirms login:
   User.confirmLoggedIn();
@@ -125,7 +127,7 @@ var makeSteps = function(ctrl) {
     ctrl.tutorial.steps.map(function(step, idx){
       return  m('.panel', [
               m('.panel-header', [
-              m('i.fa.fa-trash.pull-right'),
+              m('i.fa.fa-trash.pull-right', { onclick: function(e) { e.preventDefault(); ctrl.removeStep(idx) } }),
               m('form', 'Step Title:', { type: 'text',  style: 'margin-right: 40%;' }, [
               m('br'),
               m('.panel-body', [
@@ -164,10 +166,6 @@ var buttons = function(ctrl) {
           //onclick pushes a new step object into the steps array, the map function maps over it and changes view
           onclick:  function(e) { e.preventDefault(); ctrl.tutorial.steps.push( Tutorial.stepVM() );}
         }, "Add Step"),
-        m("button.btn.btn-primary.btn-lrg[type='button']", {
-          //calls the delete step function
-          onclick: function(e) { e.preventDefault(); ctrl.removeStep(this.idx) }
-        }, "Delete Step"),
         m("button.btn.btn-success.btn-lrg[type='button']", {
           //calls the ctrl.save function which updates or creates, and then reroutes back to the main page
           onclick: function(e) { e.preventDefault(); ctrl.save(ctrl.tutorial); m.route('/'); }

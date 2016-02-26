@@ -23,10 +23,13 @@ Tutorial.create = function(tutorial) {
 Tutorial.updateByID = function(id, tutorial) {
   return m.request({method : 'PUT', url : '/api/tutorials/' + id, data : tutorial});
 }
-
 Tutorial.delete = function(id) {
   return m.request({method: 'DELETE', url : '/api/tutorials/delete/' + id});
 }
+Tutorial.addToFavorites = function(user, tutorial){
+  
+}
+
 //Tutorial object view model creator
 Tutorial.tutorialVM = function () {
   return {

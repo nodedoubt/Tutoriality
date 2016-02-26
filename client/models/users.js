@@ -4,11 +4,7 @@ var OAuth = require('../lib/oauth.min.js').OAuth;
 var OAuthUser = require('../lib/oauth.min.js').User;
 var config = require('../../server/lib/config');
 
-// var dbUser = require('../../server/models/user.js');
-
-
 OAuth.initialize(config.credentials.oauth.key);
-
 var User = module.exports;
 
 User.signIn = function() {
@@ -22,9 +18,9 @@ User.signIn = function() {
       var ouser = User.getInfo()
       ouser.data._id = user.value._id
       ouser.save().done(function() {
-          return user;
+        return user;
       }).fail(function(err) {
-          throw err;
+        throw err;
       });
     });
   })
@@ -55,7 +51,9 @@ User.isUserMatch = function(id) {
 User.confirmLoggedIn = function() {
 	if(!User.isLoggedIn()) {
 		m.route('/sign-in');
-	}
+	} else {
+    return true;
+  }
 }
 //This is an OAuth method that gets the identity of the signed in user
 User.getInfo = function() {

@@ -78,7 +78,7 @@ CreateTutorial.view = function (ctrl, options) {
 var createTemplate = function(ctrl, options) {
 
   return m('.CreateTutorial', [
-            m('h2', 'Create Tutorial'),
+          m('h1', 'Create Tutorial'),
           m('div', [
             m('fieldset', [
               // m('legend', 'Tutorial Information'),

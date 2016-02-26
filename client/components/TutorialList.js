@@ -4,6 +4,7 @@ var Accordian      = require('./Accordion.js');
 var Tutorial       = require('../models/tutorials.js')
 var mainLayout     = require('../layouts/main');
 var Read           = require('./ReadTutorial.js');
+var User           = require('../models/users');
 var List           = module.exports;
 
 
@@ -25,17 +26,19 @@ List.view = function (ctrl, options) {
   var view = m('.listView', [
 
     m('div.page-header', [
-      m('h1', 'Tutorial List')
+      m('h1', 'Tutorials')
     ]),
 
     m('div.content-area', [
       ctrl.tutorials.map(function(tutorial) {
         return m('div.panel.panel-default', [
           m('div.panel-heading', [
-            m('a[href=#/read/' + tutorial.id + '].panel-title.list-link', tutorial.title)
+            m('a[href=#/read/' + tutorial.id + '].panel-title.list-link', tutorial.title),
+            m('h5', "Created by " + User.getName()),
           ])
         ],
-        m('div.panel-body', tutorial.content.children[0]));
+        m('div.panel-body', tutorial.content.children[0])
+        );
       })
     ])
 

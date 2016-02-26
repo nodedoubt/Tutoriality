@@ -36,7 +36,7 @@ Profile.view = function (ctrl, options) {
     }
   };
   var view = m('.profile', [
-        m('img', { src: User.getPic(), width: '200', height: '200' }),
+        m('img.avatar', { src: User.getPic(), width: '200', height: '200' }),
         m('h2', User.getName()),
         m('hr'),
         m('h2', 'My Tutorials'),
@@ -59,7 +59,7 @@ Profile.view = function (ctrl, options) {
           m('div.panel-body', tutorial.content.children[0]));
         }),
         m('hr'),
-        m('h2', 'My Progress'),
+        m('h2', 'My Favorites'),
       ])
   return mainLayout(view);
 }

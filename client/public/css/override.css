@@ -12,9 +12,9 @@ ul.nav a:hover {
 }
 
 .created-by-pic {
-  width: 80px;
-  height: 80px;
+  width: 32px;
+  height: 32px;
   float: left;
-  padding: 10px;
+  margin-right: 20px;
   border-radius: 50%;
 }

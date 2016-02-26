@@ -15,8 +15,6 @@ Read.controller = function () {
 
   ctrl.tutorial = null;
   ctrl.listSteps = null;
-  ctrl.comments = [{name: 'fuckyou', comment: 'civil discourse on the internet is important', created: 'July 12th, 2015'},
-  {name: 'ice cube', comment: 'chickity check yo self before you wreck yoself', created: 'July 12th, 2016'}];
 
   Tutorial.fetchByID(ctrl.id).then(function(tutorial) {
      ctrl.tutorial = tutorial
@@ -26,11 +24,10 @@ Read.controller = function () {
 
 Read.view = function (ctrl, options) {
     var view =  m('.content-read', [
-                m('.tutorial-header', [
-                m('h2', ctrl.tutorial.title),
+                m('.tutorial-header.clearfix', [
+                m('h2.tutorial-title', ctrl.tutorial.title),
                 m('img.created-by-pic', {src: User.getPic()}),
                 m('h5.created-by', "Created by " + User.getName()),
-                m('p', ctrl.tutorial.description),
                 m('.auth-edit', [
                 User.confirmLoggedIn() && User.isUserMatch(ctrl.tutorial.created_by) ? [
                   m('div', editBtn(options, ctrl.tutorial))
@@ -38,6 +35,7 @@ Read.view = function (ctrl, options) {
              ])
         ]),
         m('.content-steps', [
+          m('p.lead', ctrl.tutorial.description),
           ctrl.tutorial.steps.map(function(list, index) {
             index = index+1;
             return m('div', {'aria-multiselectable': 'true'}, [
@@ -47,40 +45,7 @@ Read.view = function (ctrl, options) {
               ])
             ])
           })
-        ]),
-        m('.comments',{style: {border: "1px solid red"}},[
-          ctrl.comments.map(function(comment){
-            return m('.singleComment',[
-              m('img.comment.Avatar',{src: '#', width: '75', height: '75'}),
-              m('p', comment.name),
-              m('p', comment.comment),
-              m('p', comment.created)
-             ])
-          }),
-          //this is the add a comment logic
-          m('img.comment.Avatar', { src: User.getPic(), width: '75', height: '75' }),
-          m('p', User.getName()),
-            m('fieldset', [
-                m('form', { type: 'text' }, [
-                  m('br'),
-                  m('textarea.form-control', {
-                    type: 'text',
-                    placeholder: 'Write a comment',
-                    style: 'width: 75%;',
-                    onchange: function(e) { e.preventDefault();
-                      //console.log(this.value);
-                      ctrl.comments.push({name:'Tina Yothers', comment:this.value, created: Date.now()});
-                    }
-                  }),
-                ]),
-                // m("button.btn.btn-success.btn-lrg[type='button']", {
-                //   onclick: function(e) { e.preventDefault(); console.log('iam hte comments'); }
-                // }, "Reply")
-            ]),
-                m("button.btn.btn-success.btn-lrg[type='button']", {
-                  onclick: function(e) {console.log('iam hte comments'); e.preventDefault();}
-                }, "Reply")
-        ]),
+        ])
     ]);
     return mainLayout(view);
 };

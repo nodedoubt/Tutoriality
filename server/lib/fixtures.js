@@ -20,7 +20,6 @@ module.exports = {
         {
           title: "Next Steps",
           content: "Give your steps a meaningful label and description to help your future students move forward."
-
         },
       ],
     },    
@@ -31,16 +30,15 @@ module.exports = {
       steps : [
         {
           title : "Navigate to Google",
-          content : "Head on over to www.google.com to begin your search.?"
+          content : "Head on over to www.google.com to begin your search."
         },
         {
           title : "Enter Search",
-          content : "Enter a word or phrase that represents the you're looking for."
+          content : "Enter a word or phrase that represents what you're looking for."
         },
         {
           title: "Peruse Results",
           content: "Browse your search results and determine if there's a good match. If not, let your results improve your search term and phrase and search again."
-
         },
       ],
     },    

@@ -41,7 +41,6 @@ CreateTutorial.controller = function () {
     //if one was passed in, delete the tutorial by ID, and then update the tutorial in the database with new info
     if(tutorialID) {
       delete tutorial['_id'];
-      console.log(tutorial);
       Tutorial.updateByID(tutorialID, tutorial);
     }
     else {

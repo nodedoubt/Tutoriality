@@ -27,6 +27,10 @@ img {
 	padding-bottom: 30px;
 }
 
+.tutorial-header .fa {
+  margin-top: 24px;
+}
+
 div.btn {
 	float: right;
 	margin: -54px;

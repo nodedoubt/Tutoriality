@@ -21,14 +21,15 @@ Tutorial.create = function(tutorial) {
 }
 //updates a tutorial by the id given to it
 Tutorial.updateByID = function(id, tutorial) {
+  console.log("the tt is", tutorial)
   return m.request({method : 'PUT', url : '/api/tutorials/' + id, data : tutorial});
 }
 Tutorial.delete = function(id) {
   return m.request({method: 'DELETE', url : '/api/tutorials/delete/' + id});
 }
-Tutorial.addToFavorites = function(user, tutorial){
-  
-}
+// Tutorial.toggleFavorite = function(id, tutorial){
+//   return m.request({method : 'PUT', url : '/api/tutorials/' + id, data : tutorial});
+// }
 
 //Tutorial object view model creator
 Tutorial.tutorialVM = function () {
@@ -36,7 +37,7 @@ Tutorial.tutorialVM = function () {
     title: '',
     description: '',
     steps: [ Tutorial.stepVM() ],
-    created_by : User.getID(),
+    created_by : User.getID()
   }
 }
 //Step object view model creator

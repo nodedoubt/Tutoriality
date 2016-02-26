@@ -30,5 +30,12 @@ router.post('/tutorials', function(request, response){
 	});
 });
 
+router.delete('/tutorials/delete/:id', function(request, response){
+  var id = request.params.id;
+  Tutorial.delete(id).then(function(res){
+  	response.send(res);
+  })
+})
+
 module.exports = router;
 

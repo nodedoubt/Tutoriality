@@ -18,6 +18,7 @@ Read.controller = function () {
 
   Tutorial.fetchByID(ctrl.id).then(function(tutorial) {
      ctrl.tutorial = tutorial
+     console.log(ctrl.tutorial)
   })
 };
 
@@ -25,7 +26,8 @@ Read.view = function (ctrl, options) {
     var view =  m('.content-read', [
                 m('.tutorial-header', [
                 m('h2', ctrl.tutorial.title),
-                m('h5.created-by', "Created by " + ctrl.tutorial.created_by),
+                m('img.created-by-pic', {src: User.getPic()}),
+                m('h5.created-by', "Created by " + User.getName()),
                 m('p', ctrl.tutorial.description),
                 m('.auth-edit', [
                 User.confirmLoggedIn() && User.isUserMatch(ctrl.tutorial.created_by) ? [

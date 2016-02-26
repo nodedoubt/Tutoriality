@@ -17,7 +17,7 @@
 	font-weight: 200;
 	margin: 25px 0px 0px 25px;
 	color: #317eac;
-  width: 90%;
+  /*width: 90%;*/
 
 }
 
@@ -25,8 +25,8 @@
 	margin: 0 auto;
 	font-weight: 200;
 	padding-bottom: 30;
-  width: 90%;
-
+/*  width: 90%;
+*/
 }
 
 div.btn {
@@ -41,15 +41,11 @@ div.btn {
 }
 
 button.add-step-btn {
-  width: 60%;
+  width: 100%;
 }
 
 button.save-step-btn {
-  width: 20%;
-}
-
-button.cancel-step-btn {
-  width: 20%;
+  float: right;
 }
 
 .content-steps {

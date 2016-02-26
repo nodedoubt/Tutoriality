@@ -80,6 +80,10 @@ CreateTutorial.view = function (ctrl, options) {
 var createTemplate = function(ctrl, options) {
 
   return m('.CreateTutorial', [
+          m("button.save-step-btn.btn.btn-success.btn-md[type='button']", {
+            //calls the ctrl.save function which updates or creates, and then reroutes back to the main page
+            onclick: function(e) { e.preventDefault(); ctrl.save(ctrl.tutorial); m.route('/'); }
+          }, "Save"),
           m('h1', 'Create Tutorial'),
           m('div', [
             m('fieldset', [
@@ -162,17 +166,10 @@ var makeSteps = function(ctrl) {
 var buttons = function(ctrl) {
   return m('.button-container', [
       m(".step-btns.btn-group[aria-label='...'][role='group']", [
-        m("button.add-step-btn.btn.btn-primary.btn-lrg[type='button']", {
+        m("button.add-step-btn.btn.btn-primary.btn-lg[type='button']", {
           //onclick pushes a new step object into the steps array, the map function maps over it and changes view
           onclick:  function(e) { e.preventDefault(); ctrl.tutorial.steps.push( Tutorial.stepVM() );}
         }, "Add Step"),
-        m("button.save-step-btn.btn.btn-success.btn-lrg[type='button']", {
-          //calls the ctrl.save function which updates or creates, and then reroutes back to the main page
-          onclick: function(e) { e.preventDefault(); ctrl.save(ctrl.tutorial); m.route('/'); }
-        }, "Save"),
-        m("button.cancel-step-btn.btn.btn-danger.button-lrg[type='button']", {
-          onclick: function(e) {e.preventDefault(); m.route('/'); }
-        }, "Cancel"),
       ]),
       m('br'),
       m('br'),

@@ -38,6 +38,7 @@ CreateTutorial.controller = function () {
   ctrl.save = function (tutorial) {
     //checking again to see if a tutorial ID was passed in
     var tutorialID = ctrl.tutorialID();
+    console.log(ctrl.tutorial);
     //if one was passed in, delete the tutorial by ID, and then update the tutorial in the database with new info
     if(tutorialID) {
       delete tutorial['_id'];
@@ -134,7 +135,7 @@ var makeSteps = function(ctrl) {
                   m('form', 'Step ' + (1 + idx), { type: 'text',  style: 'margin-right: 40%;' }, [
                     m('br'),
                   ]),
-                ]),                  
+                ]),
                   m('.panel-body', [
                     m('input.form-control', {
                       type: 'text',

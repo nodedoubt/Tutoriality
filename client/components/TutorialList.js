@@ -16,7 +16,9 @@ List.controller = function () {
         return {
           id: tutorial._id,
           title: tutorial.title,
-          content: m('.tutorial-content', tutorial.description)
+          content: m('.tutorial-content', tutorial.description),
+          author: tutorial.author,
+          pic: tutorial.pic
         };
       });
   });
@@ -31,10 +33,11 @@ List.view = function (ctrl, options) {
 
     m('div.content-area', [
       ctrl.tutorials.map(function(tutorial) {
+        console.log(tutorial);
         return m('div.panel.panel-default', [
           m('div.panel-heading', [
             m('a[href=#/read/' + tutorial.id + '].panel-title.list-link', tutorial.title),
-            m('h5', "Created by " + User.getName()),
+            m('h5', "Created by " + tutorial.author),
           ])
         ],
         m('div.panel-body', tutorial.content.children[0])

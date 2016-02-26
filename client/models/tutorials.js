@@ -40,7 +40,10 @@ Tutorial.tutorialVM = function () {
     title: '',
     description: '',
     steps: [ Tutorial.stepVM() ],
-    created_by : User.getID()
+    created_by : User.getID(),
+    favorites: [],
+    author: User.getName(),
+    pic: User.getPic()
   }
 }
 //Step object view model creator

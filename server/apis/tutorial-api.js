@@ -6,6 +6,7 @@ router.get('/tutorials', function(request, response){
 	// run a find a without an id to get all tutorials
   var query = request.query || {}
 	Tutorial.find(query).then(function(tutorials){
+    console.log(tutorials);
 		response.send(tutorials);
 	});
 });

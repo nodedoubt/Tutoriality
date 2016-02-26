@@ -53,3 +53,12 @@
 .panel-body {
 
 }
+
+.fa.fa-trash {
+  font-size: 40px;
+}
+
+.fa.fa-trash:hover {
+  color: red;
+  cursor: pointer;
+}

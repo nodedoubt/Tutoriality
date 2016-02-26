@@ -125,8 +125,8 @@ var makeSteps = function(ctrl) {
     ctrl.tutorial.steps.map(function(step, idx){
       return  m('.panel', [
               m('.panel-header', [
+              m('i.fa.fa-trash.pull-right'),
               m('form', 'Step Title:', { type: 'text',  style: 'margin-right: 40%;' }, [
-              m('i.trash.glyphicon.glyphicon-trash'),
               m('br'),
               m('.panel-body', [
               m('input.form-control', {

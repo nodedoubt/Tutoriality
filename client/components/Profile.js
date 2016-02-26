@@ -53,11 +53,13 @@ Profile.view = function (ctrl, options) {
         //render my tutorials
         ctrl.tutorials.map(function(tutorial) {
           return m('div.panel.panel-default', [
-            m('div', editBtn(tutorial)),
-            m('button.btn', {onclick: function(e){
-              e.preventDefault();
-              ctrl.delete(tutorial.id);
-            }},'Delete'),
+            m('div.btn-container', [
+              editBtn(tutorial),
+              m('button.btn.btn-md.btn-danger.btn-delete', {onclick: function(e){
+                e.preventDefault();
+                ctrl.delete(tutorial.id);
+              }},'Delete'),
+              ]),
             m('div.panel-heading', [
               m('h3.panel-title.list-link', {onclick: function(e){
                 // grab tutorial id and pass to read using variadic route
@@ -85,7 +87,7 @@ Profile.view = function (ctrl, options) {
 }
 
 var editBtn = function(tutorial) {
-  return m('button.btn', {onclick : function(){
+  return m('button.btn.btn-md.btn-primary.btn-edit', {onclick : function(){
     m.route('/edit/' + tutorial.id);
   }}, "Edit")
 }

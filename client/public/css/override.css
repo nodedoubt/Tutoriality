@@ -9,6 +9,12 @@ ul.nav a:hover {
 .created-by {
   background-color: #F5F5DC;
   margin-left: 25px;
-  /*margin: auto auto;*/
+}
 
+.created-by-pic {
+  width: 80px;
+  height: 80px;
+  float: left;
+  padding: 10px;
+  border-radius: 50%;
 }

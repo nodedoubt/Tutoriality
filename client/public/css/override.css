@@ -3,5 +3,12 @@
 }
 
 ul.nav a:hover {
-  background-color: #317EAC;
+  background-color: #317EAC !important;
+}
+
+.created-by {
+  background-color: #F5F5DC;
+  margin-left: 25px;
+  /*margin: auto auto;*/
+
 }

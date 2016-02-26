@@ -20,7 +20,6 @@ module.exports = {
         {
           title: "Next Steps",
           content: "Give your steps a meaningful label and description to help your future students move forward."
-
         },
       ],
     },    

@@ -5,6 +5,7 @@
   padding-top: 5px;
 }
 
+
 .content-area {
   margin: 0 auto;
   background-color: transparent;
@@ -17,6 +18,8 @@
   /*color: #eee;*/
 }
 
+
+*/
 /* Specific styles for the list view page */
 .listView h1 {
   text-align: left;

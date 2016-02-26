@@ -72,3 +72,8 @@ User.getName = function(){
 User.getPic = function(){
 	return User.getInfo().data.avatar;
 }
+
+User.getIdentity = function(id) {
+  return OAuthUser.getIdentity(id);
+}
+

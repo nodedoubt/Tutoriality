@@ -18,7 +18,7 @@ Read.controller = function () {
   ctrl.tutorial = null;
   ctrl.listSteps = null;
 
-  ctrl.comments = [{name: 'fuckyou', comment: 'civil discourse on the internet is important', created: 'July 12th, 2015'},
+  ctrl.comments = [{name: 'Carlyl', comment: 'civil discourse on the internet is important', created: 'July 12th, 2015'},
   {name: 'ice cube', comment: 'chickity check yo self before you wreck yoself', created: 'July 12th, 2016'}];
 
   Tutorial.fetchByID(ctrl.id).then(function(tutorial) {
@@ -56,8 +56,8 @@ Read.view = function (ctrl, options) {
                   ctrl.toggleFavorite(ctrl.tutorial);
                 }}, [ m('i', {class:ctrl.faved ? 'fa fa-star' : 'fa fa-star-o'}, " Favorite") ]),
                 m('h2.tutorial-title', ctrl.tutorial.title),
-                m('img.created-by-pic', {src: User.getPic()}),
-                m('h5.created-by', "Created by " + ctrl.tutorial.created_by),
+                m('img.created-by-pic', {src: ctrl.tutorial.pic}),
+                m('h5.created-by', "Created by " + ctrl.tutorial.author),
                 m('.auth-edit', [
                 User.confirmLoggedIn() && User.isUserMatch(ctrl.tutorial.created_by) ? [
                   m('div', editBtn(options, ctrl.tutorial))

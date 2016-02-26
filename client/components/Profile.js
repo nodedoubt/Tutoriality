@@ -9,12 +9,21 @@ Profile.controller = function () {
   var ctrl = this;
   ctrl.tutorials = [];
   Tutorial.fetchByUserID(User.getID()).then(function(tutorials) {
-    console.log(tutorials)
     ctrl.tutorials = _.map(tutorials, function(tutorial) {
         return {
           id: tutorial._id,
           title: tutorial.title,
           content: m('.tutorial-content', tutorial.description)
+        };
+      });
+  });
+  Tutorial.fetchUserFavorites(User.getID()).then(function(favorites) {
+    console.log(favorites)
+    ctrl.favorites = _.map(favorites, function(favorite) {
+        return {
+          id: favorite._id,
+          title: favorite.title,
+          content: m('.tutorial-content', favorite.description)
         };
       });
   });
@@ -60,6 +69,17 @@ Profile.view = function (ctrl, options) {
         }),
         m('hr'),
         m('h2', 'My Favorites'),
+        ctrl.favorites.map(function(favorite) {
+          return m('div.panel.panel-default', [
+            m('div.panel-heading', [
+              m('h3.panel-title.list-link', {onclick: function(e){
+                // grab favorite id and pass to read using variadic route
+                m.route('/read/' + favorite.id)
+              }}, favorite.title)
+            ])
+          ],
+          m('div.panel-body', favorite.content.children[0]));
+        }),
       ])
   return mainLayout(view);
 }

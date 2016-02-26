@@ -41,3 +41,24 @@
 .page-header {
   border-bottom: 3px solid #eee;
 }
+
+.panel {
+  background-color: #ddd
+}
+
+.panel-header {
+
+}
+
+.panel-body {
+
+}
+
+.fa.fa-trash {
+  font-size: 40px;
+}
+
+.fa.fa-trash:hover {
+  color: red;
+  cursor: pointer;
+}

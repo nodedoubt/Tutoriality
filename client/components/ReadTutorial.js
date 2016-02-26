@@ -45,7 +45,11 @@ Read.view = function (ctrl, options) {
               ])
             ])
           })
-        ])
+        ]),
+        m('.comments',[
+          m('img.commentAvatar', { src: User.getPic(), width: '75', height: '75' }),
+          m('p', User.getName()),
+        ]),
     ]);
     return mainLayout(view);
 };

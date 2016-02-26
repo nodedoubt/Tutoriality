@@ -8,7 +8,6 @@ var Tutorial = require('../models/tutorials.js')
 Profile.controller = function () {
   var ctrl = this;
   ctrl.tutorials = [];
-  console.log("the userid we're passing", User.getID().toString())
   Tutorial.fetchByUserID(User.getID()).then(function(tutorials) {
     console.log(tutorials)
     ctrl.tutorials = _.map(tutorials, function(tutorial) {
@@ -30,7 +29,6 @@ Profile.controller = function () {
   }
 }
 
-
 Profile.view = function (ctrl, options) {
   var attributes = {
     onclick : function() {
@@ -50,7 +48,7 @@ Profile.view = function (ctrl, options) {
             m('button.btn', {onclick: function(e){
               e.preventDefault();
               ctrl.delete(tutorial.id);
-            }},'Delete me Baby'),
+            }},'Delete'),
             m('div.panel-heading', [
               m('h3.panel-title.list-link', {onclick: function(e){
                 // grab tutorial id and pass to read using variadic route
@@ -66,32 +64,8 @@ Profile.view = function (ctrl, options) {
   return mainLayout(view);
 }
 
-  var editBtn = function(tutorial) {
-    return m('button.btn', {onclick : function(){
-      m.route('/edit/' + tutorial.id);
-    }}, "Edit")
-  }
-
-  //onclick:  function(e) { e.preventDefault(); ctrl.tutorial.steps.push( Tutorial.stepVM() );}
-
-  // var dltBtn = function(tutorial) {
-  //   return m('button.btn', {onclick : function(e){
-  //     e.preventDefault();
-  //     ctrl.delete(tutorial.id);
-  //   }}, "Delete")
-  // }
-
-
-      // ctrl.tutorials.map(function(tutorial) {
-      //   return m('div.panel.panel-default', [
-      //     m('div.panel-heading', [
-      //       m('h3.panel-title.list-link', {onclick: function(e){
-      //         // grab tutorial id and pass to read using variadic route
-      //         m.route('/read/' + tutorial.id)
-      //       }}, tutorial.title)
-      //     ])
-      //   ],
-      //   m('div.panel-body', tutorial.content.children[0]));
-      // })
-//do a successful DB call to get back tutorials
-//map them into profile view
+var editBtn = function(tutorial) {
+  return m('button.btn', {onclick : function(){
+    m.route('/edit/' + tutorial.id);
+  }}, "Edit")
+}

@@ -4,6 +4,7 @@ module.exports = {
       title : "Getting Started with Tutoriality",
       description : "How to create your first tutorial using Tutoriality.",
       created_by: "dave",
+      favorites: [],
       steps : [
         {
           title : "Sign In ",
@@ -27,6 +28,7 @@ module.exports = {
       title : "Searching Google",
       description : "How to search the world wide web using Google Search.",
       created_by : "dave",
+      favorites: [],
       steps : [
         {
           title : "Navigate to Google",
@@ -46,6 +48,7 @@ module.exports = {
       title : "Computer troubleshooting",
       description : "How to fix your computer.",
       created_by: "dave",
+      favorites: [],
       steps : [
         {
           title : "Plug check",

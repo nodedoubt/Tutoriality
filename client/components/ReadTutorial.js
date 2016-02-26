@@ -9,6 +9,8 @@ var MarkDownText   = require('../components/MarkDownText');
 
 Read.controller = function () {
   var ctrl = this;
+  var userId = User.getID();
+
 
   ctrl.id = m.route.param('id');
   User.confirmLoggedIn();
@@ -16,15 +18,40 @@ Read.controller = function () {
   ctrl.tutorial = null;
   ctrl.listSteps = null;
 
+
   Tutorial.fetchByID(ctrl.id).then(function(tutorial) {
      ctrl.tutorial = tutorial
-     console.log(ctrl.tutorial)
+     if(ctrl.tutorial.favorites.indexOf(userId.toString()) === -1){
+       ctrl.faved = false;
+     } else {
+       ctrl.faved = true;
+     }
   })
+
+  ctrl.toggleFavorite = function(tutorial){
+    if(ctrl.tutorial.favorites.indexOf(userId.toString()) === -1){
+      ctrl.tutorial.favorites.push(userId);
+      ctrl.faved = true;
+    } else {
+      console.log("in the slice")
+      ctrl.tutorial.favorites = ctrl.tutorial.favorites.slice(ctrl.tutorial.favorites.indexOf(userId), 0);
+      ctrl.faved = false;
+    }
+    delete tutorial['_id'];
+    console.log(tutorial);
+    Tutorial.updateByID(ctrl.id, ctrl.tutorial).then(function(tutorial) {
+       console.log("FAV TOGGLED!!!");
+    })
+  }
 };
 
 Read.view = function (ctrl, options) {
     var view =  m('.content-read', [
                 m('.tutorial-header.clearfix', [
+                m('a[href=/#/].pull-right', { onclick: function(e){
+                  e.preventDefault();
+                  ctrl.toggleFavorite(ctrl.tutorial)
+                }}, [ m('i', {class:ctrl.faved ? 'fa fa-star' : 'fa fa-star-o'}, " Favorite") ]),
                 m('h2.tutorial-title', ctrl.tutorial.title),
                 m('img.created-by-pic', {src: User.getPic()}),
                 m('h5.created-by', "Created by " + User.getName()),

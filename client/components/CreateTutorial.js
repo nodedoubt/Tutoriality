@@ -126,33 +126,33 @@ var makeSteps = function(ctrl) {
 //maps over objects in steps array and creates input fields for properties in objects
     ctrl.tutorial.steps.map(function(step, idx){
       return  m('.panel', [
-              m('.panel-header', [
-              m('i.fa.fa-trash.pull-right', { onclick: function(e) { e.preventDefault(); ctrl.removeStep(idx) } }),
-              m('form', 'Step Title:', { type: 'text',  style: 'margin-right: 40%;' }, [
-              m('br'),
-              m('.panel-body', [
-              m('input.form-control', {
-                type: 'text',
-                placeholder: 'Give a short description of step',
-                style: 'width: 75%',
-                value : step.title,
-                onchange: function() { step.title = this.value }
-                 }),
-              m('br'),
-              m('form', { type: 'text' }),
-              m('textarea.form-control', {
-                rows:'3',
-                type:'text',
-                placeholder:'Step it out!',
-                style: 'width:75%; height:175px ',
-                value : step.content,
-                onchange: function() { step.content = this.value }
-                 }),
-              m('br'),
-             ])
-            ])
-          ])
-        ])
+                m('.panel-header', [
+                  m('i.fa.fa-trash.pull-right', { onclick: function(e) { e.preventDefault(); ctrl.removeStep(idx) } }),
+                  m('form', 'Step Title:', { type: 'text',  style: 'margin-right: 40%;' }, [
+                    m('br'),
+                  ]),
+                  m('.panel-body', [
+                    m('input.form-control', {
+                      type: 'text',
+                      placeholder: 'Give a short description of step',
+                      style: 'width: 75%',
+                      value : step.title,
+                      onchange: function() { step.title = this.value }
+                    }),
+                    m('br'),
+                    m('form', { type: 'text' }),
+                    m('textarea.form-control', {
+                      rows:'3',
+                      type:'text',
+                      placeholder:'Step it out!',
+                      style: 'width:75%; height:175px ',
+                      value : step.content,
+                      onchange: function() { step.content = this.value }
+                    }),
+                    m('br'),
+                  ])
+                ])
+              ])
     })
   ])
 }

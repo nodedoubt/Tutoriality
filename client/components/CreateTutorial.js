@@ -53,7 +53,9 @@ CreateTutorial.controller = function () {
 //This removes the first step.
   ctrl.removeStep = function (idx) {
     console.log('all steps: ', ctrl.tutorial.steps);
-    ctrl.tutorial.steps.pop();
+    console.log('index:', idx)
+    ctrl.tutorial.steps.splice(idx, 1);
+    console.log('after:', ctrl.tutorial.steps)
   }
 //confirms login:
   User.confirmLoggedIn();
@@ -124,33 +126,33 @@ var makeSteps = function(ctrl) {
 //maps over objects in steps array and creates input fields for properties in objects
     ctrl.tutorial.steps.map(function(step, idx){
       return  m('.panel', [
-              m('.panel-header', [
-              m('i.fa.fa-trash.pull-right'),
-              m('form', 'Step Title:', { type: 'text',  style: 'margin-right: 40%;' }, [
-              m('br'),
-              m('.panel-body', [
-              m('input.form-control', {
-                type: 'text',
-                placeholder: 'Give a short description of step',
-                style: 'width: 75%',
-                value : step.title,
-                onchange: function() { step.title = this.value }
-                 }),
-              m('br'),
-              m('form', { type: 'text' }),
-              m('textarea.form-control', {
-                rows:'3',
-                type:'text',
-                placeholder:'Step it out!',
-                style: 'width:75%; height:175px ',
-                value : step.content,
-                onchange: function() { step.content = this.value }
-                 }),
-              m('br'),
-             ])
-            ])
-          ])
-        ])
+                m('.panel-header', [
+                  m('i.fa.fa-trash.pull-right', { onclick: function(e) { e.preventDefault(); ctrl.removeStep(idx) } }),
+                  m('form', 'Step Title:', { type: 'text',  style: 'margin-right: 40%;' }, [
+                    m('br'),
+                  ]),
+                  m('.panel-body', [
+                    m('input.form-control', {
+                      type: 'text',
+                      placeholder: 'Give a short description of step',
+                      style: 'width: 75%',
+                      value : step.title,
+                      onchange: function() { step.title = this.value }
+                    }),
+                    m('br'),
+                    m('form', { type: 'text' }),
+                    m('textarea.form-control', {
+                      rows:'3',
+                      type:'text',
+                      placeholder:'Step it out!',
+                      style: 'width:75%; height:175px ',
+                      value : step.content,
+                      onchange: function() { step.content = this.value }
+                    }),
+                    m('br'),
+                  ])
+                ])
+              ])
     })
   ])
 }
@@ -164,10 +166,6 @@ var buttons = function(ctrl) {
           //onclick pushes a new step object into the steps array, the map function maps over it and changes view
           onclick:  function(e) { e.preventDefault(); ctrl.tutorial.steps.push( Tutorial.stepVM() );}
         }, "Add Step"),
-        m("button.btn.btn-primary.btn-lrg[type='button']", {
-          //calls the delete step function
-          onclick: function(e) { e.preventDefault(); ctrl.removeStep(this.idx) }
-        }, "Delete Step"),
         m("button.btn.btn-success.btn-lrg[type='button']", {
           //calls the ctrl.save function which updates or creates, and then reroutes back to the main page
           onclick: function(e) { e.preventDefault(); ctrl.save(ctrl.tutorial); m.route('/'); }
